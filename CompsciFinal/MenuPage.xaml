@@ -1,0 +1,112 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="CompsciFinal.MenuPage" BackgroundColor="#3d3a3c">
+    <ContentPage.Content>
+        <StackLayout
+            
+            Margin="20,20,10,0"
+            
+            >
+
+            <ImageButton
+                    
+                    x:Name="userIcon"
+                    Source="standinuser.png"
+                HeightRequest="100"
+                WidthRequest="100"
+                HorizontalOptions="Center"
+                BackgroundColor="#3d3a3c"
+               
+                   
+                    
+                    ></ImageButton>
+
+            <StackLayout>
+
+
+                
+                <Label
+                    
+                    x:Name="userUsername"
+                    Text="Username goes here"
+                    TextColor="White"
+                    HorizontalOptions="Center"
+                    FontSize="20"
+                    Margin="0,0,0,20"
+                    
+                    ></Label>
+                
+            </StackLayout>
+
+            <StackLayout>
+
+
+                <Image
+                    
+                    Source=""
+                    
+                    >
+                </Image>
+
+                <Button
+
+                    
+                    Text="Shitty Question Builder"
+                    TextColor="White"
+                    x:Name="questionBuilder"
+                    BackgroundColor="#4f494d"
+                    Clicked="questionBuilder_Clicked"
+                    
+                    ></Button>
+
+                <Button
+                    
+                    Text="School Creation"
+                    TextColor="White"
+                    x:Name="schoolCreator"
+                    BackgroundColor="#4f494d"
+                    Clicked="schoolCreator_Clicked"
+                    
+                    ></Button>
+
+               
+
+                <Button
+                    
+                    Text="Statistics Page"
+                    TextColor="White"
+                    x:Name="statsPage"
+                    BackgroundColor="#4f494d"
+                    Clicked="statsPage_Clicked"
+                    
+                    ></Button>
+
+                <Button
+                    
+                    Text="Accounts Page"
+                    TextColor="White"
+                    x:Name="accountsPage"
+                    BackgroundColor="#4f494d"
+                    Clicked="accountsPage_Clicked"
+                    
+                    ></Button>
+
+                <Button
+                    
+                    Text="Login Page"
+                    TextColor="White"
+                    x:Name="loginPage"
+                    BackgroundColor="#4f494d"
+                    Clicked="loginPage_Clicked"
+                    
+                    ></Button>
+
+            </StackLayout>
+            
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

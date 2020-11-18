@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="CompsciFinal.AccountsPage" BackgroundColor="#3d3a3c">
+    <ContentPage.Content>
+        <StackLayout>
+
+            <StackLayout VerticalOptions="Start">
+                <Label Text="Username" x:Name="usernameLabel" TextColor="White" FontSize="20" HorizontalOptions="Center" Margin="20,0" ></Label>
+            </StackLayout>
+
+            <StackLayout VerticalOptions="Center">
+
+                <Button x:Name="showHideResetPass" Clicked="showHideResetPass_Clicked"  Text="Reset Password" Margin="20,0"></Button>
+                <StackLayout x:Name="passResetContainer">
+
+                    <Label Text="Reset Password" TextColor="White" HorizontalOptions="Center"></Label>
+                    <Entry x:Name="emailTextBox" Placeholder="Email" PlaceholderColor="Gray" TextColor="White" Margin="20,0">></Entry>
+                    <Button x:Name="resetEmail" Clicked="resetEmail_Clicked" Text="Reset email" BackgroundColor="Red" TextColor="White" Margin="20,0">></Button>
+
+                </StackLayout>
+
+
+            </StackLayout>
+            
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

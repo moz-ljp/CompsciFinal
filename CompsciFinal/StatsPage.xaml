@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="CompsciFinal.StatsPage" BackgroundColor="#3d3a3c">
+    <ContentPage.Content>
+        <StackLayout>
+            <StackLayout VerticalOptions="Start">
+                    <Label Text="CompsciApp" HorizontalOptions="Center" TextColor="White" FontSize="30"></Label>
+                </StackLayout>
+
+            <StackLayout VerticalOptions="Start" >
+                <StackLayout Grid.Row="1" Orientation="Horizontal" Spacing="10" HorizontalOptions="Center">
+
+                    <Label Text="Success Rate:" TextColor="White" FontSize="20" HorizontalOptions="Center"></Label>
+                    <Label Text="0" TextColor="White" FontSize="20" HorizontalOptions="Center" x:Name="successRateLabel"></Label>
+
+                </StackLayout>
+
+                <StackLayout Grid.Row="1" Orientation="Horizontal" Spacing="10" HorizontalOptions="Center">
+                    <Label Text="Total Score:" TextColor="White" FontSize="20" HorizontalOptions="Center"></Label>
+                    <Label Text="0" TextColor="White" FontSize="20" HorizontalOptions="Center" x:Name="scoreLabel"></Label>
+                </StackLayout>
+
+                <StackLayout Grid.Row="1" Orientation="Horizontal" Spacing="10" HorizontalOptions="Center">
+                    <Label Text="Position:" TextColor="White" FontSize="20" HorizontalOptions="Center"></Label>
+                    <Label Text="0" TextColor="White" FontSize="20" HorizontalOptions="Center" x:Name="positionLabel"></Label>
+                </StackLayout>
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

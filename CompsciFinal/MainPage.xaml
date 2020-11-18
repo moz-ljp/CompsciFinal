@@ -1,0 +1,127 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="CompsciFinal.MainPage" BackgroundColor="#3d3a3c" >
+
+    <StackLayout>
+
+        <StackLayout>
+        <Label
+            x:Name="questionLabel"
+            TextColor="White"
+            Text="Hello"
+            FontSize="30"
+            HorizontalOptions="Center"
+            HorizontalTextAlignment="Center"
+            ></Label>
+
+        <Button
+            x:Name="answerone"
+            Text=""
+            FontSize="30"
+            Margin="10,0,10,0"
+            Clicked="answeroneclicked"
+            
+            ></Button>
+        <Button
+            x:Name="answertwo"
+            Text=""
+            FontSize="30"
+            Margin="10,0,10,0"
+            Clicked="answertwoclicked"
+
+            
+            ></Button>
+        <Button
+            x:Name="answerthree"
+            Text=""
+            FontSize="30"
+            Margin="10,0,10,0"
+            Clicked="answerthreeclicked"
+            
+            ></Button>
+        <Button
+            x:Name="answerfour"
+            Text=""
+            FontSize="30"
+            Margin="10,0,10,0"
+            Clicked="answerfourclicked"
+            
+            ></Button>
+        <Button
+            Margin="10"
+            x:Name="nextquestion"
+            BackgroundColor="red"
+            Text="Next Question"
+            FontSize="30"
+            TextColor="White"
+            Clicked="nextquestionclicked"
+            ></Button>
+
+    </StackLayout>
+
+        <StackLayout HorizontalOptions="Center">
+
+            <ImageButton
+                
+                x:Name="downVote"
+                Clicked="downVote_Clicked"
+                Source="thumbsdown.png"
+                WidthRequest="30"
+                HeightRequest="30"
+                BackgroundColor="#3d3a3c"
+                
+                
+                ></ImageButton>
+            
+            <Label Text=""
+               x:Name="resultLabel"
+               FontSize="20"
+               HorizontalTextAlignment="Center"
+               ></Label>
+        </StackLayout>
+
+        <StackLayout>
+
+
+        <Label Text="0"
+               x:Name="counterLabel"
+               FontSize="40"
+               HorizontalTextAlignment="Center"
+               VerticalOptions="EndAndExpand"
+               TextColor="Lime"></Label>
+
+            
+        
+    </StackLayout>
+
+        <FlexLayout
+                
+                HorizontalOptions="CenterAndExpand" BackgroundColor="#4f4e4e"
+                VerticalOptions="EndAndExpand"
+                >
+
+        </FlexLayout>
+
+        <Label Text="" x:Name="usernameLabel" HorizontalOptions="Center" TextColor="White" FontSize="30"></Label>
+
+        <ImageButton
+           
+            Clicked="menuButton"
+                HorizontalOptions="CenterAndExpand"
+            BackgroundColor="#3d3a3c"
+                Margin="10"
+                WidthRequest="80"
+                HeightRequest="60"
+             Source="newmenu.png"
+                    
+            >
+
+        </ImageButton>
+
+    </StackLayout>
+
+</ContentPage>
