@@ -21,7 +21,7 @@
         <Button
             x:Name="answerone"
             Text=""
-            FontSize="30"
+            FontSize="20"
             Margin="10,0,10,0"
             Clicked="answeroneclicked"
             
@@ -29,7 +29,7 @@
         <Button
             x:Name="answertwo"
             Text=""
-            FontSize="30"
+            FontSize="20"
             Margin="10,0,10,0"
             Clicked="answertwoclicked"
 
@@ -38,7 +38,7 @@
         <Button
             x:Name="answerthree"
             Text=""
-            FontSize="30"
+            FontSize="20"
             Margin="10,0,10,0"
             Clicked="answerthreeclicked"
             
@@ -46,7 +46,7 @@
         <Button
             x:Name="answerfour"
             Text=""
-            FontSize="30"
+            FontSize="20"
             Margin="10,0,10,0"
             Clicked="answerfourclicked"
             

@@ -18,8 +18,8 @@
                 <StackLayout x:Name="passResetContainer">
 
                     <Label Text="Reset Password" TextColor="White" HorizontalOptions="Center"></Label>
-                    <Entry x:Name="emailTextBox" Placeholder="Email" PlaceholderColor="Gray" TextColor="White" Margin="20,0">></Entry>
-                    <Button x:Name="resetEmail" Clicked="resetEmail_Clicked" Text="Reset email" BackgroundColor="Red" TextColor="White" Margin="20,0">></Button>
+                    <Entry x:Name="emailTextBox" Placeholder="Email" PlaceholderColor="Gray" TextColor="White" Margin="20,0"></Entry>
+                    <Button x:Name="resetEmail" Clicked="resetEmail_Clicked" Text="Reset email" BackgroundColor="Red" TextColor="White" Margin="20,0"></Button>
 
                 </StackLayout>
 

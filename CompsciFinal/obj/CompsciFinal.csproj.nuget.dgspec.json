@@ -50,6 +50,10 @@
               "target": "Package",
               "version": "[4.0.4, )"
             },
+            "Microcharts.Forms": {
+              "target": "Package",
+              "version": "[0.9.5.9, )"
+            },
             "NETStandard.Library": {
               "suppressParent": "All",
               "target": "Package",
