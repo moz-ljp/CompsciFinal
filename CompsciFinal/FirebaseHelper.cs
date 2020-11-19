@@ -44,6 +44,16 @@ namespace CompsciFinal
               }).ToList();
         }
 
+        public async Task<List<uid>> GetAllUids()
+        {
+            return (await firebase
+                .Child("Persons")
+                .OnceAsync<uid>()).Select(item => new uid
+                {
+                    uidString = item.Object.ToString()
+                }).ToList();
+        }
+
         public async Task AddPerson(string name, string uid, int score, int totalAnsweredB) //add an account (creating account in login page)
         {
 

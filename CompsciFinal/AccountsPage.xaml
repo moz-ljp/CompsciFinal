@@ -23,6 +23,30 @@
 
                 </StackLayout>
 
+                <Button x:Name="showHidechangeUsername" Clicked="showHidechangeUsername_Clicked"  Text="Change username" Margin="20,0"></Button>
+                <StackLayout x:Name="usernameChangeContainer">
+
+                    <Label Text="Change Username" TextColor="White" HorizontalOptions="Center"></Label>
+                    <Entry x:Name="usernameTextBox" Placeholder="Username" PlaceholderColor="Gray" TextColor="White" Margin="20,0"></Entry>
+                    <Entry x:Name="usernameTextBoxNEW" Placeholder="New Username" PlaceholderColor="Gray" TextColor="White" Margin="20,0"></Entry>
+                    <Entry x:Name="usernameEmailTextBox" Placeholder="Email" PlaceholderColor="Gray" TextColor="White" Margin="20,0"></Entry>
+                    <Entry x:Name="usernamePasswordTextBox" Placeholder="Password" PlaceholderColor="Gray" TextColor="White" Margin="20,0" IsPassword="True"></Entry>
+                    <Button x:Name="changeUsername" Clicked="changeUsername_Clicked"  Text="Change Username" BackgroundColor="Red" TextColor="White" Margin="20,0"></Button>
+
+                </StackLayout>
+
+                <Button x:Name="showHidechangePassword" Clicked="showHidechangePassword_Clicked"  Text="Change password" Margin="20,0"></Button>
+                <StackLayout x:Name="passwordChangeContainer">
+
+                    <Label Text="Change Password" TextColor="White" HorizontalOptions="Center"></Label>
+                    <Entry x:Name="passwordUsernameTextBox" Placeholder="Username" PlaceholderColor="Gray" TextColor="White" Margin="20,0"></Entry>
+                    <Entry x:Name="passwordEmailTextBox" Placeholder="Email" PlaceholderColor="Gray" TextColor="White" Margin="20,0"></Entry>
+                    <Entry x:Name="changePassPasswordTextBox" Placeholder="Password" PlaceholderColor="Gray" TextColor="White" Margin="20,0" IsPassword="True"></Entry>
+                    <Entry x:Name="changePassPasswordTextBoxNew" Placeholder="Password" PlaceholderColor="Gray" TextColor="White" Margin="20,0" IsPassword="True"></Entry>
+                    <Button x:Name="changePassword" Clicked="changePassword_Clicked"  Text="Change Password" BackgroundColor="Red" TextColor="White" Margin="20,0"></Button>
+
+                </StackLayout>
+
 
             </StackLayout>
             

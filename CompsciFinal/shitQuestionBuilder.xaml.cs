@@ -96,12 +96,12 @@ namespace CompsciFinal
 
         public async void btnCreateQ_Clicked(object sender, EventArgs e)
         {
-            if (Question.Text.Length != 0)
+            if (Question.Text.Length != 0 && Question.Text.Length < 15)
             {
-                if (Correct.Text.Length != 0)
+                if (Correct.Text.Length != 0 && Correct.Text.Length < 15)
                 {
 
-                    if (IncorrectA.Text.Length != 0)
+                    if (IncorrectA.Text.Length != 0 && IncorrectA.Text.Length < 15)
 
                     {
                         await questionsHelper.AddQuestion(Question.Text, Correct.Text, IncorrectA.Text, IncorrectB.Text, IncorrectC.Text, Tags.Text);
@@ -116,11 +116,47 @@ namespace CompsciFinal
                         //var allPersons = await firebaseHelper.GetAllPersons();
                         //lstPersons.ItemsSource = allPersons;
                     }
+                    else
+                    {
+                        if (IncorrectA.Text.Length == 0)
+                        {
+                            await DisplayAlert("Error", "Your incorrect answers cannot be empty", "OK");
+                        }
+                        else
+                        {
+                            await DisplayAlert("Error", "Your incorrect answers cannot be too long", "OK");
+                        }
 
+                    }
+
+
+                }
+                else
+                {
+                    if (Correct.Text.Length == 0)
+                    {
+                        await DisplayAlert("Error", "Your answer cannot be empty", "OK");
+                    }
+                    else
+                    {
+                        await DisplayAlert("Error", "Your answer cannot be too long", "OK");
+                    }
 
                 }
 
 
+            }
+            else
+            {
+                if(Question.Text.Length == 0)
+                {
+                    await DisplayAlert("Error", "Your question cannot be empty", "OK");
+                }
+                else
+                {
+                    await DisplayAlert("Error", "Your question cannot be too long", "OK");
+                }
+                
             }
         }
 

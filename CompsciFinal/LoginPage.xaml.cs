@@ -157,19 +157,51 @@ namespace CompsciFinal
         {
 
             bool hasAtSymbol = false;
+            bool onlyOneAt = false;
+
+            int atCount = 0;
 
             foreach(char x in email)
             {
                 if (x.ToString() == "@")
+                {
                     hasAtSymbol = true;
+                    onlyOneAt = true;
+                    atCount++;
+                }
+                    
             }
 
-            if (hasAtSymbol)
+            if (atCount > 1)
+                onlyOneAt = false;
+
+
+            if (hasAtSymbol && onlyOneAt)
                 return true;
             else
                 return false;
 
 
+        }
+
+        public bool usernameValidation(string username)
+        {
+            bool lengthCheck = false;
+            bool doesNotContainSymbol = true;
+
+            if (username.Length > 2)
+                lengthCheck = true;
+
+            foreach(char x in username)
+            {
+                if (char.IsPunctuation(x) || char.IsSymbol(x))
+                    doesNotContainSymbol = false;
+            }
+
+            if (lengthCheck && !doesNotContainSymbol)
+                return true;
+            else
+                return false;
         }
 
         public async void create()
@@ -179,7 +211,9 @@ namespace CompsciFinal
 
             bool emailValid = emailValidation(emailField.Text);
 
-            if(passValid && emailValid)
+            bool usernameValid = usernameValidation(usernameField.Text);
+
+            if(passValid && emailValid && usernameValid)
 
             {
 
@@ -213,10 +247,15 @@ namespace CompsciFinal
                     await DisplayAlert("Error", thisFailedVal, "Ok");
                     passwordField.Text = "";
                 }
-                else
+                else if(!emailValid)
                 {
                     await DisplayAlert("Error", "Invalid email", "Ok");
                     emailField.Text = "";
+                }
+                else
+                {
+                    await DisplayAlert("Error", "Username is not valid", "Ok");
+                    usernameField.Text = "";
                 }
                 
             }

@@ -9,28 +9,28 @@
       <StackLayout>
 
 
-            <Entry x:Name="Question" Placeholder="Question" TextColor="White" PlaceholderColor="Gray"></Entry>
-            <Entry x:Name="Correct" Placeholder="Correct Answer" TextColor="White" PlaceholderColor="Gray"></Entry>
-            <Entry x:Name="IncorrectA" Placeholder="Incorrect Answer A" TextColor="White" PlaceholderColor="Gray"></Entry>
-            <Entry x:Name="IncorrectB" Placeholder="Incorrect Answer B" TextColor="White" PlaceholderColor="Gray"></Entry>
-            <Entry x:Name="IncorrectC" Placeholder="Incorrect Answer C" TextColor="White" PlaceholderColor="Gray"></Entry>
-            <Entry x:Name="Tags" Placeholder="Tag" TextColor="White" PlaceholderColor="Gray"></Entry>
+            <Entry x:Name="Question" Placeholder="Question" TextColor="White" PlaceholderColor="Gray" Margin="10,0"></Entry>
+            <Entry x:Name="Correct" Placeholder="Correct Answer" TextColor="White" PlaceholderColor="Gray" Margin="10,0"></Entry>
+            <Entry x:Name="IncorrectA" Placeholder="Incorrect Answer A" TextColor="White" PlaceholderColor="Gray" Margin="10,0"></Entry>
+            <Entry x:Name="IncorrectB" Placeholder="Incorrect Answer B" TextColor="White" PlaceholderColor="Gray" Margin="10,0"></Entry>
+            <Entry x:Name="IncorrectC" Placeholder="Incorrect Answer C" TextColor="White" PlaceholderColor="Gray" Margin="10,0"></Entry>
+            <Entry x:Name="Tags" Placeholder="Tag" TextColor="White" PlaceholderColor="Gray" Margin="10,0"></Entry>
 
-            <Button x:Name="btnCreateQ" WidthRequest="150" Text="Create" Clicked="btnCreateQ_Clicked" BackgroundColor="#4f4e4e" TextColor="White"/>
+            <Button x:Name="btnCreateQ" WidthRequest="150" Text="Create" Clicked="btnCreateQ_Clicked" BackgroundColor="#4f4e4e" TextColor="White" Margin="10,0"/>
 
             <Picker
           x:Name="tagPicker"
                 Title="Tags"
-                TitleColor="Aqua"
-          TextColor="Aqua"
-                
+                TitleColor="HotPink"
+          TextColor="Black"
+                Margin="10,0"
                 
                
 
           ></Picker>
 
             <Button
-                
+                Margin="10,0"
                 x:Name="addTag"
                 Text="Add Tag"
                 BackgroundColor="Red"
@@ -41,12 +41,12 @@
                 
                 x:Name="taglist"
                 TextColor="White"
-                
+                Margin="10,0"
                 
                 ></Label>
 
             <Button
-                
+                Margin="10,0"
                 x:Name="submitbtn"
                 Clicked="submitbtn_Clicked"
                 Text="Submit Tags"

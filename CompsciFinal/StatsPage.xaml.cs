@@ -29,6 +29,7 @@ namespace CompsciFinal
             System.Diagnostics.Debug.Write("Person SCORE", person.Score.ToString());
             System.Diagnostics.Debug.Write("Total answered:", person.totalAnswered.ToString());
             double successRate = Convert.ToDouble((Convert.ToDecimal(person.Score) / Convert.ToDecimal(person.totalAnswered)) * 100);
+            successRate = Math.Round(successRate);
             System.Diagnostics.Debug.Write("Success Rate:", successRate.ToString());
             successRateLabel.Text = successRate.ToString() + '%';
             scoreLabel.Text = person.Score.ToString() ;

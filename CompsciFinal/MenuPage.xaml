@@ -12,19 +12,6 @@
             
             >
 
-            <ImageButton
-                    
-                    x:Name="userIcon"
-                    Source="standinuser.png"
-                HeightRequest="100"
-                WidthRequest="100"
-                HorizontalOptions="Center"
-                BackgroundColor="#3d3a3c"
-               
-                   
-                    
-                    ></ImageButton>
-
             <StackLayout>
 
 
@@ -35,8 +22,8 @@
                     Text="Username goes here"
                     TextColor="White"
                     HorizontalOptions="Center"
-                    FontSize="20"
-                    Margin="0,0,0,20"
+                    FontSize="30"
+                    Margin="0,0,0,10"
                     
                     ></Label>
                 
@@ -55,7 +42,7 @@
                 <Button
 
                     
-                    Text="Shitty Question Builder"
+                    Text="Question creation and Tag Selection"
                     TextColor="White"
                     x:Name="questionBuilder"
                     BackgroundColor="#4f494d"
@@ -82,6 +69,16 @@
                     x:Name="statsPage"
                     BackgroundColor="#4f494d"
                     Clicked="statsPage_Clicked"
+                    
+                    ></Button>
+
+                <Button
+                    
+                    Text="Leader board Page"
+                    TextColor="White"
+                    x:Name="leaderBoardPage"
+                    BackgroundColor="#4f494d"
+                    Clicked="leaderBoardPage_Clicked"
                     
                     ></Button>
 

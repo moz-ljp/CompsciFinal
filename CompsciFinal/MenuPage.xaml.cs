@@ -22,6 +22,10 @@ namespace CompsciFinal
             InitializeComponent();
             thisPerson = person;
             thisAuthLink = authlink;
+            if (person.PersonId != null)
+                userUsername.Text = person.Name;
+            else
+                userUsername.Text = "Guest User";
         }
 
 
@@ -48,6 +52,11 @@ namespace CompsciFinal
         private async void accountsPage_Clicked(object sender, EventArgs e)
         {
             await Navigation.PushModalAsync(new AccountsPage(thisPerson));
+        }
+
+        private async void leaderBoardPage_Clicked(object sender, EventArgs e)
+        {
+            await Navigation.PushModalAsync(new LeaderboardPage());
         }
     }
 }
