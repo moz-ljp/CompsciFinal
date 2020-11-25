@@ -21,6 +21,13 @@ namespace CompsciFinal
 
         List<Entry> entries = new List<Entry>();
 
+        List<string> questionsOrdered = new List<string>();
+
+        List<int> scores = new List<int>();
+        List<int> scoresOrdered = new List<int>();
+
+        string topTopic;
+
         public StatsPage(Person person)
         {
             InitializeComponent();
@@ -33,7 +40,7 @@ namespace CompsciFinal
             successRate = Math.Round(successRate);
             System.Diagnostics.Debug.Write("Success Rate:", successRate.ToString());
             successRateLabel.Text = successRate.ToString() + '%';
-            scoreLabel.Text = person.Score.ToString() ;
+            scoreLabel.Text = person.Score.ToString();
 
             graphContainer.IsVisible = false;
 
@@ -65,6 +72,40 @@ namespace CompsciFinal
             SuccessRateChartBar.Chart.BackgroundColor = SKColor.Parse("#3d3a3c");
             SuccessRateChartBar.Chart.LabelColor = SKColor.Parse("#ffffff");
 
+            topicSorter();
+
+        }
+
+        public async void topicSorter()
+        {
+            double conversionsSuccess = successRateCalculator(person.conversionsScore, person.totalConversions);
+            double cyberSuccess = successRateCalculator(person.cyberScore, person.totalCyber);
+            double programmingSuccess = successRateCalculator(person.programmingScore, person.totalProgramming);
+            double hardwareSuccess = successRateCalculator(person.hardwareScore, person.totalHardware);
+            double softwareSuccess = successRateCalculator(person.softwareScore, person.totalSoftware);
+
+            Dictionary<string, double> successRates = new Dictionary<string, double>();
+
+            successRates.Add("conversions", conversionsSuccess);
+            successRates.Add("cybersecurity", cyberSuccess);
+            successRates.Add("programming", programmingSuccess);
+            successRates.Add("hardware", hardwareSuccess);
+            successRates.Add("software", softwareSuccess);
+
+            var successSorted = successRates.OrderBy(f => f.Value);
+
+            bestTopicLabel.Text = successSorted.Last().Key;
+            worstTopicLabel.Text = successSorted.First().Key;
+            secondWorstTopicLabel.Text = successSorted.ElementAt(1).Key;
+            
+
+        }
+
+        public double successRateCalculator(int correct, int total)
+        {
+
+            return Convert.ToDouble((Convert.ToDecimal(correct) / Convert.ToDecimal(total)) * 100);
+            
         }
 
 

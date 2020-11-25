@@ -8,6 +8,7 @@
              x:Class="CompsciFinal.StatsPage" BackgroundColor="#3d3a3c">
     <ContentPage.Content>
         <StackLayout>
+
             <StackLayout VerticalOptions="Start">
                     <Label Text="CompsciApp" HorizontalOptions="Center" TextColor="White" FontSize="30" Margin="0,0,0,0"></Label>
                 <Label Text="" HorizontalOptions="Center" TextColor="White" FontSize="20" Margin="0,0,0,100" x:Name="usernameLabel"></Label>
@@ -29,6 +30,19 @@
                 <StackLayout Grid.Row="1" Orientation="Horizontal" Spacing="10" HorizontalOptions="Center">
                     <Label Text="Position:" TextColor="White" FontSize="20" HorizontalOptions="Center"></Label>
                     <Label Text="0" TextColor="White" FontSize="20" HorizontalOptions="Center" x:Name="positionLabel"></Label>
+                </StackLayout>
+
+                <StackLayout Grid.Row="1" Orientation="Horizontal" Spacing="10" HorizontalOptions="Center">
+                    <Label Text="Best Topic:" TextColor="White" FontSize="20" HorizontalOptions="Center"></Label>
+                    <Label Text="0" TextColor="White" FontSize="20" HorizontalOptions="Center" x:Name="bestTopicLabel"></Label>
+                </StackLayout>
+                <StackLayout Grid.Row="1" Orientation="Horizontal" Spacing="10" HorizontalOptions="Center">
+                    <Label Text="Worst Topic:" TextColor="White" FontSize="20" HorizontalOptions="Center"></Label>
+                    <Label Text="0" TextColor="White" FontSize="20" HorizontalOptions="Center" x:Name="worstTopicLabel"></Label>
+                </StackLayout>
+                <StackLayout Grid.Row="1" Orientation="Horizontal" Spacing="10" HorizontalOptions="Center">
+                    <Label Text="Second Worst Topic:" TextColor="White" FontSize="20" HorizontalOptions="Center"></Label>
+                    <Label Text="0" TextColor="White" FontSize="20" HorizontalOptions="Center" x:Name="secondWorstTopicLabel"></Label>
                 </StackLayout>
             </StackLayout>
 

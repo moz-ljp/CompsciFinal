@@ -133,7 +133,7 @@ namespace CompsciFinal
                     resultLabel.TextColor = Color.Lime;
                     score += 1;
                     increaseTagScore(true);
-                    correctSound.Play();
+                    playAudio(true);
                     //incScore();
                     counterLabel.Text = score.ToString();
                 }
@@ -142,7 +142,7 @@ namespace CompsciFinal
                     counterLabel.Text = score.ToString();
                     resultLabel.Text = "Incorrect";
                     increaseTagScore(false);
-                    incorrectSound.Play();
+                    playAudio(false);
                     resultLabel.TextColor = Color.Red;
                 }
                 if (masterLogged)
@@ -168,7 +168,7 @@ namespace CompsciFinal
                     resultLabel.TextColor = Color.Lime;
                     score += 1;
                     increaseTagScore(true);
-                    correctSound.Play();
+                    playAudio(true);
                     //incScore();
                     counterLabel.Text = score.ToString();
                 }
@@ -177,7 +177,7 @@ namespace CompsciFinal
                     counterLabel.Text = score.ToString();
                     resultLabel.Text = "Incorrect";
                     increaseTagScore(false);
-                    incorrectSound.Play();
+                    playAudio(false);
                     resultLabel.TextColor = Color.Red;
                 }
                 if (masterLogged)
@@ -203,7 +203,7 @@ namespace CompsciFinal
                     resultLabel.TextColor = Color.Lime;
                     score += 1;
                     increaseTagScore(true);
-                    correctSound.Play();
+                    playAudio(true);
                     //incScore();
                     counterLabel.Text = score.ToString();
                 }
@@ -212,7 +212,7 @@ namespace CompsciFinal
                     counterLabel.Text = score.ToString();
                     resultLabel.Text = "Incorrect";
                     increaseTagScore(false);
-                    incorrectSound.Play();
+                    playAudio(false);
                     resultLabel.TextColor = Color.Red;
                 }
 
@@ -238,7 +238,7 @@ namespace CompsciFinal
                     resultLabel.Text = "Correct";
                     resultLabel.TextColor = Color.Lime;
                     score += 1;
-                    correctSound.Play();
+                    playAudio(true);
                     //incScore();
                     counterLabel.Text = score.ToString();
                     increaseTagScore(true);
@@ -249,7 +249,7 @@ namespace CompsciFinal
                     counterLabel.Text = score.ToString();
                     resultLabel.Text = "Incorrect";
                     increaseTagScore(false);
-                    incorrectSound.Play();
+                    playAudio(false);
                     resultLabel.TextColor = Color.Red;
                 }
 
@@ -298,6 +298,15 @@ namespace CompsciFinal
             {
 
             }
+        }
+
+        public async void playAudio(bool correct)
+        {
+            if (correct)
+                correctSound.Play();
+            else
+                incorrectSound.Play();
+
         }
 
 

@@ -32,6 +32,8 @@ namespace CompsciFinal
         {
             InitializeComponent();
 
+            usernameLabel.Text = person.Name;
+
             this.person = person;
 
             passResetContainer.IsVisible = false;
