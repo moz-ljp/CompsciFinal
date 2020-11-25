@@ -13,6 +13,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using LiteDB;
+using Plugin.SimpleAudioPlayer;
 
 namespace CompsciFinal
 {
@@ -25,6 +26,9 @@ namespace CompsciFinal
         FirebaseHelper firebaseHelper = new FirebaseHelper();
 
         QuestionsHelper questionsHelper = new QuestionsHelper();
+
+        ISimpleAudioPlayer correctSound = CrossSimpleAudioPlayer.CreateSimpleAudioPlayer();
+        ISimpleAudioPlayer incorrectSound = CrossSimpleAudioPlayer.CreateSimpleAudioPlayer();
 
         int count = 0;
 
@@ -58,6 +62,8 @@ namespace CompsciFinal
 
         public string thisuid;
 
+        string thisTag;
+
         Person person;
 
         bool masterLogged = false;
@@ -67,6 +73,10 @@ namespace CompsciFinal
         FirebaseClient firebase = new FirebaseClient("https://compsci-c8f5a.firebaseio.com//");
 
         private const string BaseUrl = "https://compsci-c8f5a.firebaseio.com//";
+
+        public List<string> newTagsList = new List<string>();
+        public List<int> newTagScore = new List<int>();
+        public List<int> newTagTotal = new List<int>();
 
         //private ChildQuery _query;
 
@@ -79,6 +89,10 @@ namespace CompsciFinal
             NavigationPage.SetHasNavigationBar(this, false);
             
             thisuid = user.PersonId;
+
+            correctSound.Load("correct.wav");
+            incorrectSound.Load("incorrect.wav");
+
 
             thisauthLink = authLink;
 
@@ -118,6 +132,8 @@ namespace CompsciFinal
                     resultLabel.Text = "Correct";
                     resultLabel.TextColor = Color.Lime;
                     score += 1;
+                    increaseTagScore(true);
+                    correctSound.Play();
                     //incScore();
                     counterLabel.Text = score.ToString();
                 }
@@ -125,6 +141,8 @@ namespace CompsciFinal
                 {
                     counterLabel.Text = score.ToString();
                     resultLabel.Text = "Incorrect";
+                    increaseTagScore(false);
+                    incorrectSound.Play();
                     resultLabel.TextColor = Color.Red;
                 }
                 if (masterLogged)
@@ -149,6 +167,8 @@ namespace CompsciFinal
                     resultLabel.Text = "Correct";
                     resultLabel.TextColor = Color.Lime;
                     score += 1;
+                    increaseTagScore(true);
+                    correctSound.Play();
                     //incScore();
                     counterLabel.Text = score.ToString();
                 }
@@ -156,6 +176,8 @@ namespace CompsciFinal
                 {
                     counterLabel.Text = score.ToString();
                     resultLabel.Text = "Incorrect";
+                    increaseTagScore(false);
+                    incorrectSound.Play();
                     resultLabel.TextColor = Color.Red;
                 }
                 if (masterLogged)
@@ -180,6 +202,8 @@ namespace CompsciFinal
                     resultLabel.Text = "Correct";
                     resultLabel.TextColor = Color.Lime;
                     score += 1;
+                    increaseTagScore(true);
+                    correctSound.Play();
                     //incScore();
                     counterLabel.Text = score.ToString();
                 }
@@ -187,6 +211,8 @@ namespace CompsciFinal
                 {
                     counterLabel.Text = score.ToString();
                     resultLabel.Text = "Incorrect";
+                    increaseTagScore(false);
+                    incorrectSound.Play();
                     resultLabel.TextColor = Color.Red;
                 }
 
@@ -212,15 +238,18 @@ namespace CompsciFinal
                     resultLabel.Text = "Correct";
                     resultLabel.TextColor = Color.Lime;
                     score += 1;
+                    correctSound.Play();
                     //incScore();
                     counterLabel.Text = score.ToString();
-                    
+                    increaseTagScore(true);
                     
                 }
                 else
                 {
                     counterLabel.Text = score.ToString();
                     resultLabel.Text = "Incorrect";
+                    increaseTagScore(false);
+                    incorrectSound.Play();
                     resultLabel.TextColor = Color.Red;
                 }
 
@@ -231,6 +260,44 @@ namespace CompsciFinal
             }
 
             solved = true;
+        }
+
+        public async void increaseTagScore(bool correct)
+        {
+            if(thisTag == "hardware")
+            {
+                if(correct)
+                    person.hardwareScore++;
+                person.totalHardware++;
+            }
+            else if(thisTag == "software")
+            {
+                if(correct)
+                    person.softwareScore++;
+                person.totalSoftware++;
+            }
+            else if(thisTag == "cyber security")
+            {
+                if(correct)
+                    person.cyberScore++;
+                person.totalCyber++;
+            }
+            else if(thisTag == "conversions")
+            {
+                if(correct)
+                    person.conversionsScore++;
+                person.totalConversions++;
+            }
+            else if(thisTag == "programming")
+            {
+                if(correct)
+                    person.programmingScore++;
+                person.totalProgramming++;
+            }
+            else
+            {
+
+            }
         }
 
 
@@ -337,7 +404,11 @@ namespace CompsciFinal
 
                     string incorrectC = Questions[randommessage].IncorrectAnswerThree.ToString();
 
-
+                if (masterLogged)
+                    thisTag = Questions[randommessage].tag.ToLower();
+                else
+                    thisTag = null;
+                    
 
                     solved = false; //say that the current question is not solved.
 

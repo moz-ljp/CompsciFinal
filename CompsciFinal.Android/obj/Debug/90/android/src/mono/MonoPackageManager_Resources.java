@@ -12,6 +12,8 @@ public class MonoPackageManager_Resources {
 		"Microcharts.Droid.dll",
 		"Microcharts.Forms.dll",
 		"Newtonsoft.Json.dll",
+		"Plugin.SimpleAudioPlayer.Abstractions.dll",
+		"Plugin.SimpleAudioPlayer.dll",
 		"SkiaSharp.dll",
 		"SkiaSharp.Views.Android.dll",
 		"SkiaSharp.Views.Forms.dll",

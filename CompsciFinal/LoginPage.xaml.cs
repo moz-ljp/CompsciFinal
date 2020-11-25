@@ -47,16 +47,20 @@ namespace CompsciFinal
                     var authProvider = new FirebaseAuthProvider(new FirebaseConfig("AIzaSyCGJx-mKV7Ms8BRkJupNe8wvlHwZDJAXMs"));
 
                     var auth = await authProvider.SignInWithEmailAndPasswordAsync(emailField.Text, passwordField.Text);
+                    await loadingBar.ProgressTo(.4, 250, Easing.Linear);
 
                     authuid = auth.User.LocalId;
 
                     FirebaseAuthLink authLink = await auth.GetFreshAuthAsync();
 
                     firebaseHelper.createClient(authLink.FirebaseToken);
+                    await loadingBar.ProgressTo(.8, 250, Easing.Linear);
 
                     //await DisplayAlert("Debug", "Name:  " + usernameField.Text + ", AuthUID: " + authuid, "Ok");
 
                     Person user = await firebaseHelper.GetPerson(authuid);
+
+                    await loadingBar.ProgressTo(1, 250, Easing.Linear);
 
                     await DisplayAlert("Success!", "You have logged in, " + user.Name, "Ok");
 
@@ -198,7 +202,7 @@ namespace CompsciFinal
                     doesNotContainSymbol = false;
             }
 
-            if (lengthCheck && !doesNotContainSymbol)
+            if (lengthCheck)
                 return true;
             else
                 return false;
@@ -213,19 +217,23 @@ namespace CompsciFinal
 
             bool usernameValid = usernameValidation(usernameField.Text);
 
-            if(passValid && emailValid && usernameValid)
+            await loadingBar.ProgressTo(.2, 250, Easing.Linear);
+
+            if (passValid && emailValid && usernameValid)
 
             {
 
                 var authProvider = new FirebaseAuthProvider(new FirebaseConfig("AIzaSyCGJx-mKV7Ms8BRkJupNe8wvlHwZDJAXMs"));
 
                 var auth = await authProvider.CreateUserWithEmailAndPasswordAsync(emailField.Text, passwordField.Text);
+                await loadingBar.ProgressTo(.4, 250, Easing.Linear);
 
                 FirebaseAuthLink authLink = await auth.GetFreshAuthAsync();
 
                 firebaseHelper.createClient(authLink.FirebaseToken);
 
                 await firebaseHelper.AddPerson(usernameField.Text, auth.User.LocalId, 0, 0);
+                await loadingBar.ProgressTo(.8, 250, Easing.Linear);
 
                 await DisplayAlert("Success!", "Account has been created, please verify your email", "Ok");
 
@@ -235,6 +243,7 @@ namespace CompsciFinal
                 thisperson.Score = 0;
 
                 await authProvider.SendEmailVerificationAsync(auth.FirebaseToken);
+                await loadingBar.ProgressTo(1, 250, Easing.Linear);
 
                 await Navigation.PushModalAsync(new MainPage(thisperson, chosenTags, authLink));
 
@@ -266,6 +275,29 @@ namespace CompsciFinal
         private void submitCreate_Clicked(object sender, EventArgs e)
         {
             create();
+        }
+
+        private async void forgotPass_Clicked(object sender, EventArgs e)
+        {
+
+            bool decision = await DisplayAlert("Send reset email", "Are you sure?", "OK", "Cancel");
+            if(decision)
+            {
+                if (emailField.Text != "" || emailField.Text != null)
+                {
+                    var authProvider = new FirebaseAuthProvider(new FirebaseConfig("AIzaSyCGJx-mKV7Ms8BRkJupNe8wvlHwZDJAXMs"));
+
+                    await authProvider.SendPasswordResetEmailAsync(emailField.Text);
+
+                    await DisplayAlert("Success", "Reset email sent", "OK");
+                }
+
+                else
+                {
+                    await DisplayAlert("Error", "Email field cannot be empty!", "OK");
+                }
+            }
+            
         }
     }
 }

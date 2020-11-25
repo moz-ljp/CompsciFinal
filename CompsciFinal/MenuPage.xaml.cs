@@ -17,6 +17,7 @@ namespace CompsciFinal
         Person thisPerson;
         FirebaseAuthLink thisAuthLink;
 
+
         public MenuPage(Person person, FirebaseAuthLink authlink)
         {
             InitializeComponent();
@@ -46,7 +47,10 @@ namespace CompsciFinal
 
         private async void statsPage_Clicked(object sender, EventArgs e)
         {
-            await Navigation.PushModalAsync(new StatsPage(thisPerson));
+            if (thisPerson.PersonId != null)
+                await Navigation.PushModalAsync(new StatsPage(thisPerson));
+            else
+                await DisplayAlert("Error", "You must be logged in to view statistics", "OK");
         }
 
         private async void accountsPage_Clicked(object sender, EventArgs e)
@@ -56,7 +60,12 @@ namespace CompsciFinal
 
         private async void leaderBoardPage_Clicked(object sender, EventArgs e)
         {
-            await Navigation.PushModalAsync(new LeaderboardPage());
+            await Navigation.PushModalAsync(new LeaderboardPage(thisPerson, thisAuthLink));
+        }
+
+        private async void backBTN_Clicked(object sender, EventArgs e)
+        {
+            await Navigation.PopModalAsync();
         }
     }
 }

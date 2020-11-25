@@ -14,17 +14,19 @@
 
         <StackLayout VerticalOptions="CenterAndExpand">
 
-            <Entry x:Name="usernameField" Placeholder="Usename" TextColor="White" PlaceholderColor="Gray"></Entry>
-                <Entry x:Name="emailField" Placeholder="Email" TextColor="White" PlaceholderColor="Gray"></Entry>
-                <Entry x:Name="passwordField" Placeholder="Password" TextColor="White" PlaceholderColor="Gray"></Entry>
+            <Entry x:Name="usernameField" Placeholder="Usename" TextColor="White" PlaceholderColor="Gray" Margin="20,0"></Entry>
+                <Entry x:Name="emailField" Placeholder="Email" TextColor="White" PlaceholderColor="Gray" Margin="20,0" Keyboard="Email"></Entry>
+                <Entry x:Name="passwordField" Placeholder="Password" TextColor="White" PlaceholderColor="Gray" Margin="20,0" IsPassword="True"></Entry>
                 <FlexLayout>
                     <Button Text="Submit" x:Name="submitLogin" TextColor="White" BackgroundColor="Gray" Clicked="submitLogin_Clicked" Margin="10,0,10,0" WidthRequest="200"></Button>
                     <Button Text="Create" x:Name="submitCreate" TextColor="White" BackgroundColor="Gray" Clicked="submitCreate_Clicked" Margin="10,0,10,0" WidthRequest="200"></Button>
                 </FlexLayout>
                 
-                <Label Text="I Forgot My Password" x:Name="forgotPass" HorizontalOptions="Center" TextColor="White"></Label>
+                <Button Text="I Forgot My Password" x:Name="forgotPass" HorizontalOptions="Center" Clicked="forgotPass_Clicked" TextColor="White" BackgroundColor="#3d3a3c"></Button>
             
         </StackLayout>
+
+            <ProgressBar x:Name="loadingBar" />
 
 
         </StackLayout>

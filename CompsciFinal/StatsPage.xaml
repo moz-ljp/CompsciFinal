@@ -9,7 +9,8 @@
     <ContentPage.Content>
         <StackLayout>
             <StackLayout VerticalOptions="Start">
-                    <Label Text="CompsciApp" HorizontalOptions="Center" TextColor="White" FontSize="30"></Label>
+                    <Label Text="CompsciApp" HorizontalOptions="Center" TextColor="White" FontSize="30" Margin="0,0,0,0"></Label>
+                <Label Text="" HorizontalOptions="Center" TextColor="White" FontSize="20" Margin="0,0,0,100" x:Name="usernameLabel"></Label>
                 </StackLayout>
 
             <StackLayout VerticalOptions="Start" >
@@ -31,9 +32,11 @@
                 </StackLayout>
             </StackLayout>
 
-            <StackLayout>
-
-                <local:ChartView x:Name="SuccessRateChart" HeightRequest="150" BackgroundColor="#3d3a3c" Margin="20,0"></local:ChartView>
+            <Button x:Name="showHideGraphs" Clicked="showHideGraphs_Clicked"  Text="Show Graphs ▼" Margin="20,0" BackgroundColor="#3d3a3c" TextColor="HotPink"></Button>
+            <StackLayout x:Name="graphContainer">
+                
+                <local:ChartView x:Name="SuccessRateChartRadial" HeightRequest="150" BackgroundColor="#3d3a3c" Margin="20,0"></local:ChartView>
+                <local:ChartView x:Name="SuccessRateChartBar" HeightRequest="150" BackgroundColor="#3d3a3c" Margin="20,0"></local:ChartView>
                 
             </StackLayout>
             

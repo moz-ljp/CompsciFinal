@@ -70,6 +70,7 @@ namespace CompsciFinal
             TagList = TagList.Distinct().ToList();
 
             tagPicker.ItemsSource = TagList;
+            tagPickerCreation.ItemsSource = TagList;
 
 
 
@@ -96,22 +97,22 @@ namespace CompsciFinal
 
         public async void btnCreateQ_Clicked(object sender, EventArgs e)
         {
-            if (Question.Text.Length != 0 && Question.Text.Length < 15)
+            if (Question.Text.Length != 0 && Question.Text.Length < 40)
             {
-                if (Correct.Text.Length != 0 && Correct.Text.Length < 15)
+                if (Correct.Text.Length != 0 && Correct.Text.Length < 20)
                 {
 
-                    if (IncorrectA.Text.Length != 0 && IncorrectA.Text.Length < 15)
+                    if (IncorrectA.Text.Length != 0 && IncorrectA.Text.Length < 20)
 
                     {
-                        await questionsHelper.AddQuestion(Question.Text, Correct.Text, IncorrectA.Text, IncorrectB.Text, IncorrectC.Text, Tags.Text);
+                        await questionsHelper.AddQuestion(Question.Text, Correct.Text, IncorrectA.Text, IncorrectB.Text, IncorrectC.Text, tagPickerCreation.SelectedItem.ToString());//Tags.Text);
                         //txtId.Text = string.Empty;
                         Question.Text = String.Empty;
                         Correct.Text = String.Empty;
                         IncorrectA.Text = String.Empty;
                         IncorrectB.Text = String.Empty;
                         IncorrectC.Text = String.Empty;
-                        Tags.Text = String.Empty;
+                        //Tags.Text = String.Empty;
                         await DisplayAlert("Success", "Question Created", "OK");
                         //var allPersons = await firebaseHelper.GetAllPersons();
                         //lstPersons.ItemsSource = allPersons;
@@ -163,7 +164,7 @@ namespace CompsciFinal
         private async void submitbtn_Clicked(object sender, EventArgs e)
         {
 
-            if(thisPerson.PersonId != null) //if user account is logged in
+            if (thisPerson.PersonId != null) //if user account is logged in
             {
                 if (ChosenTags != null) //if chosentags list actually has tasks in, submit them
                 {
@@ -173,6 +174,22 @@ namespace CompsciFinal
                 {
                     ChosenTags.Add("all");
                     await Navigation.PushModalAsync(new MainPage(thisPerson, ChosenTags, thisAuthLink));
+                }
+            }
+            else
+            {
+                if (thisPerson.PersonId != null) //if user account is logged in
+                {
+                    if (ChosenTags != null) //if chosentags list actually has tasks in, submit them
+                    {
+                        await Navigation.PushModalAsync(new MainPage(thisPerson, ChosenTags, thisAuthLink));
+                    }
+                    else //otherwise give 'all' tag so that mainpage knows to accept all questions
+                    {
+                        ChosenTags.Add("all");
+                        await Navigation.PushModalAsync(new MainPage(thisPerson, ChosenTags, thisAuthLink));
+                    }
+
                 }
             }
 

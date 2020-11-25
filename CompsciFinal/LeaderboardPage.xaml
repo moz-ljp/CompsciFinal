@@ -9,17 +9,47 @@
         <StackLayout>
 
             <StackLayout x:Name="topThreeStack">
-                
-                
+
+                <StackLayout x:Name="topUser">
+
+                    <Label x:Name="topUserLabel" TextColor="Gold" Margin="0,0,10,0" HorizontalOptions="Center" FontSize="30"></Label>
+                    <Label x:Name="secondUserLabel" TextColor="Silver" Margin="0,0,0,0" HorizontalOptions="Center" FontSize="25"></Label>
+                    <Label x:Name="thirdUserLabel" TextColor="#cd7f32" Margin="0,0,0,100" HorizontalOptions="Center" FontSize="20"></Label>
+                    
+                </StackLayout>
                 
             </StackLayout>
+
 
             <StackLayout x:Name="restOfBoard">
 
-                <ListView x:Name="leaderBoardList"></ListView>
+                <ListView x:Name="leaderBoardList" HorizontalOptions="Center">
+
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <TextCell Text="{Binding Name}" Detail="{Binding Score}"  DetailColor="White" TextColor="White"></TextCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+
+                </ListView>
                 
             </StackLayout>
-            
+
+            <Button
+                        
+                        x:Name="backBTN"
+                        Text="Back"
+                        TextColor="White"
+                        Clicked="backBTN_Clicked"
+                        BackgroundColor="Red"
+                        
+                    ></Button>
+
+            <ProgressBar
+                x:Name="loadingBar"
+                
+                ></ProgressBar>
+
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

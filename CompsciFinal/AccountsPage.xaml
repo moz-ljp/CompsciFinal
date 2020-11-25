@@ -8,13 +8,16 @@
     <ContentPage.Content>
         <StackLayout>
 
-            <StackLayout VerticalOptions="Start">
-                <Label Text="Username" x:Name="usernameLabel" TextColor="White" FontSize="20" HorizontalOptions="Center" Margin="20,0" ></Label>
+
+            
+
+                <StackLayout VerticalOptions="Start">
+                <Label Text="Username" x:Name="usernameLabel" TextColor="White" FontSize="20" HorizontalOptions="Center" Margin="0,0,0,50" ></Label>
             </StackLayout>
 
             <StackLayout VerticalOptions="Center">
 
-                <Button x:Name="showHideResetPass" Clicked="showHideResetPass_Clicked"  Text="Reset Password" Margin="20,0"></Button>
+                <Button x:Name="showHideResetPass" Clicked="showHideResetPass_Clicked"  Text="Reset Password ▼" Margin="20,0" BackgroundColor="#3d3a3c" TextColor="HotPink"></Button>
                 <StackLayout x:Name="passResetContainer">
 
                     <Label Text="Reset Password" TextColor="White" HorizontalOptions="Center"></Label>
@@ -23,7 +26,7 @@
 
                 </StackLayout>
 
-                <Button x:Name="showHidechangeUsername" Clicked="showHidechangeUsername_Clicked"  Text="Change username" Margin="20,0"></Button>
+                <Button x:Name="showHidechangeUsername" Clicked="showHidechangeUsername_Clicked"  Text="Change username ▼" Margin="20,0" BackgroundColor="#3d3a3c" TextColor="HotPink"></Button>
                 <StackLayout x:Name="usernameChangeContainer">
 
                     <Label Text="Change Username" TextColor="White" HorizontalOptions="Center"></Label>
@@ -35,7 +38,7 @@
 
                 </StackLayout>
 
-                <Button x:Name="showHidechangePassword" Clicked="showHidechangePassword_Clicked"  Text="Change password" Margin="20,0"></Button>
+                <Button x:Name="showHidechangePassword" Clicked="showHidechangePassword_Clicked"  Text="Change password ▼" Margin="20,0" BackgroundColor="#3d3a3c" TextColor="HotPink"></Button>
                 <StackLayout x:Name="passwordChangeContainer">
 
                     <Label Text="Change Password" TextColor="White" HorizontalOptions="Center"></Label>
@@ -49,7 +52,6 @@
 
 
             </StackLayout>
-            
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

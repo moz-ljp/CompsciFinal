@@ -30,10 +30,27 @@ namespace CompsciFinal
             public Person person;
         }
 
-        public async Task<List<Person>> GetAllPersons() //get all people with all the info
+        public async Task<List<string>> GetAllPersons() //get all people with all the info
         {
-            return (await firebase
-              .Child("Persons")
+
+            //System.Diagnostics.Debug.Write("------------------------------------------");
+
+            List<string> ids = new List<string>();
+
+            var people = await firebase
+                .Child("Persons")
+                .OnceAsync<object>();
+
+            foreach(var person in people)
+            {
+                //System.Diagnostics.Debug.Write("------------------------------------------", person.Key);
+                ids.Add(person.Key);
+            }
+
+            return ids;
+
+            /*return (await firebase
+              .Child("Persons").Child()
               .OnceAsync<Person>()).Select(item => new Person
               {
                   Name = item.Object.Name,
@@ -41,25 +58,17 @@ namespace CompsciFinal
                   PersonId = item.Object.PersonId,
                   totalAnswered = item.Object.totalAnswered
 
-              }).ToList();
+              }).ToList();*/
+
         }
 
-        public async Task<List<uid>> GetAllUids()
-        {
-            return (await firebase
-                .Child("Persons")
-                .OnceAsync<uid>()).Select(item => new uid
-                {
-                    uidString = item.Object.ToString()
-                }).ToList();
-        }
 
         public async Task AddPerson(string name, string uid, int score, int totalAnsweredB) //add an account (creating account in login page)
         {
 
             await firebase
               .Child("Persons").Child(uid)
-              .PostAsync(new Person() { Name = name , Score = 0, PersonId = uid, totalAnswered = totalAnsweredB});
+              .PostAsync(new Person() { Name = name , Score = 0, PersonId = uid, totalAnswered = totalAnsweredB, cyberScore = 0, totalCyber = 0, totalProgramming = 0, totalConversions = 0, totalHardware = 0, totalSoftware = 0, softwareScore = 0, conversionsScore = 0, hardwareScore = 0, programmingScore=0});
         }
 
         public async Task<Person> GetPerson(string uid) //getting an account (logging in on logging page)
@@ -70,7 +79,17 @@ namespace CompsciFinal
                 Name = item.Object.Name,
                 Score = item.Object.Score,
                 PersonId = item.Object.PersonId,
-                totalAnswered = item.Object.totalAnswered
+                totalAnswered = item.Object.totalAnswered,
+                cyberScore = item.Object.cyberScore,
+                totalCyber = item.Object.totalCyber,
+                softwareScore = item.Object.softwareScore,
+                totalSoftware = item.Object.totalSoftware,
+                hardwareScore = item.Object.totalHardware,
+                totalHardware = item.Object.totalHardware,
+                conversionsScore = item.Object.conversionsScore,
+                totalConversions = item.Object.totalConversions,
+                programmingScore = item.Object.programmingScore,
+                totalProgramming = item.Object.totalProgramming,
 
             }).Where(a => a.PersonId == uid).FirstOrDefault();
         }
@@ -104,7 +123,7 @@ namespace CompsciFinal
               .Child("Persons")
               .Child(person.PersonId)
               .Child(toUpdatePerson.Key)
-              .PutAsync(new Person() { Name = person.Name, Score = newScore, PersonId = person.PersonId, totalAnswered = newTotal});
+              .PutAsync(new Person() { Name = person.Name, Score = newScore, PersonId = person.PersonId, totalAnswered = newTotal, softwareScore=person.softwareScore, programmingScore=person.programmingScore, totalProgramming=person.totalProgramming, totalConversions=person.totalConversions, conversionsScore = person.conversionsScore, cyberScore = person.cyberScore, hardwareScore = person.hardwareScore, totalCyber = person.totalCyber, totalHardware = person.totalHardware, totalSoftware = person.totalSoftware});
 
             System.Diagnostics.Debug.Write("-------- Point 2 -------");
         }
