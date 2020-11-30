@@ -39,6 +39,7 @@ namespace CompsciFinal
             passResetContainer.IsVisible = false;
             usernameChangeContainer.IsVisible = false;
             passwordChangeContainer.IsVisible = false;
+            classCodeContainer.IsVisible = false;
 
         }
 
@@ -179,6 +180,32 @@ namespace CompsciFinal
                 return false;
             }
 
+        }
+
+        private void showHideClassCode_Clicked(object sender, EventArgs e)
+        {
+            classCodeContainer.IsVisible = !classCodeContainer.IsVisible;
+        }
+
+        private async void changeClassCode_Clicked(object sender, EventArgs e)
+        {
+            bool decision = await DisplayAlert("Set class code", "Are you sure?", "OK", "Cancel");
+            if(decision)
+            {
+                var authProvider = new FirebaseAuthProvider(new FirebaseConfig("AIzaSyCGJx-mKV7Ms8BRkJupNe8wvlHwZDJAXMs"));
+
+                var auth = await authProvider.SignInWithEmailAndPasswordAsync(classCodeEmailTextBox.Text, classCodePasswordTextBox.Text);
+
+                authuid = auth.User.LocalId;
+
+                FirebaseAuthLink authLink = await auth.GetFreshAuthAsync();
+
+                firebaseHelper.createClient(authLink.FirebaseToken);
+
+                person.classCode = classCodeClassCodeTextBox.Text;
+
+                await firebaseHelper.UpdatePerson(person, person.Score, person.totalAnswered);
+            }
         }
     }
 }

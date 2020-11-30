@@ -241,6 +241,7 @@ namespace CompsciFinal
                 thisperson.Name = usernameField.Text;
                 thisperson.PersonId = auth.User.LocalId;
                 thisperson.Score = 0;
+                thisperson.classCode = "";
 
                 await authProvider.SendEmailVerificationAsync(auth.FirebaseToken);
                 await loadingBar.ProgressTo(1, 250, Easing.Linear);

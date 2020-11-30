@@ -25,6 +25,10 @@ namespace CompsciFinal
         public int conversionsScore { get; set; }
         public int totalConversions { get; set; }
 
+        public string classCode { get; set; }
+
+        public bool teacher { get; set; }
+
 
     }
 }

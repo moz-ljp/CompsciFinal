@@ -512,13 +512,3 @@ C:\Users\Moz\source\repos\CompsciFinal\CompsciFinal\CompsciFinal.Android\obj\Deb
 C:\Users\Moz\source\repos\CompsciFinal\CompsciFinal\CompsciFinal.Android\obj\Debug\90\android\assets\Plugin.SimpleAudioPlayer.dll
 C:\Users\Moz\source\repos\CompsciFinal\CompsciFinal\CompsciFinal.Android\obj\Debug\90\android\assets\Plugin.SimpleAudioPlayer.dll.mdb
 C:\Users\Moz\source\repos\CompsciFinal\CompsciFinal\CompsciFinal.Android\obj\Debug\90\android\assets\System.IO.dll
-C:\Users\Moz\source\repos\CompsciFinal\CompsciFinal\CompsciFinal.Android\obj\Debug\90\android\typemaps.x86.s
-C:\Users\Moz\source\repos\CompsciFinal\CompsciFinal\CompsciFinal.Android\obj\Debug\90\android\typemaps.x86_64.s
-C:\Users\Moz\source\repos\CompsciFinal\CompsciFinal\CompsciFinal.Android\obj\Debug\90\android\environment.x86.s
-C:\Users\Moz\source\repos\CompsciFinal\CompsciFinal\CompsciFinal.Android\obj\Debug\90\android\environment.x86_64.s
-C:\Users\Moz\source\repos\CompsciFinal\CompsciFinal\CompsciFinal.Android\obj\Debug\90\android\typemaps.x86.o
-C:\Users\Moz\source\repos\CompsciFinal\CompsciFinal\CompsciFinal.Android\obj\Debug\90\android\typemaps.x86_64.o
-C:\Users\Moz\source\repos\CompsciFinal\CompsciFinal\CompsciFinal.Android\obj\Debug\90\android\environment.x86.o
-C:\Users\Moz\source\repos\CompsciFinal\CompsciFinal\CompsciFinal.Android\obj\Debug\90\android\environment.x86_64.o
-C:\Users\Moz\source\repos\CompsciFinal\CompsciFinal\CompsciFinal.Android\obj\Debug\90\app_shared_libraries\x86\libxamarin-app.so
-C:\Users\Moz\source\repos\CompsciFinal\CompsciFinal\CompsciFinal.Android\obj\Debug\90\app_shared_libraries\x86_64\libxamarin-app.so

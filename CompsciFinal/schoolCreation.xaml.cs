@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Firebase.Auth;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -22,41 +23,40 @@ namespace CompsciFinal
         
         };
 
-        public schoolCreation()
+        Person person;
+
+        schoolClass thisClass;
+
+        schoolClassHelper classhelper;
+
+        FirebaseAuthLink thisAuthLink;
+
+        public schoolCreation(Person person, FirebaseAuthLink authlink)
         {
             InitializeComponent();
 
+            this.person = person;
 
+            thisAuthLink = authlink;
 
         }
 
-        public async void genCode(int id)
+        public async void genCode()
         {
-            int x = id / characters.Length;
-            int y = id % characters.Length;
 
-            bool completed = false;
+            int code = Convert.ToInt32(idField.Text);
 
-            int z = 0;
+            string hexCode = code.ToString("X2");
 
-            while (!completed)
-            {
-                if(y % characters.Length == 0) //if remainder is 0
-                {
-                    y = y / characters.Length; //y = y over characterLength
-                }
+            thisClass.schoolCode = hexCode;
+            thisClass.teacherUsername = person.Name;
+            thisClass.schoolScore = person.Score;
+            thisClass.totalSchoolAnswered = person.totalAnswered;
+            thisClass.schoolName = schoolNameField.Text;
 
-                else if(y / characters.Length == 0) //if the division = 0
-                {
-                    z = y; //finalise
-                    completed = true;
-                }
-            }
+            classhelper.createClient(thisAuthLink.FirebaseToken);
 
-
-            string thisCode = characters[x].ToString() + characters[z].ToString();
-
-            idLabel.Text = thisCode;
+            await classhelper.AddschoolClass(thisClass);
             
         }
 
@@ -67,7 +67,7 @@ namespace CompsciFinal
 
         private void btnSolveID_Clicked(object sender, EventArgs e)
         {
-            genCode(Convert.ToInt32(ID.Text));
+            genCode();
         }
     }
 }

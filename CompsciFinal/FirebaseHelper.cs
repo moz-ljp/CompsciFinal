@@ -68,7 +68,7 @@ namespace CompsciFinal
 
             await firebase
               .Child("Persons").Child(uid)
-              .PostAsync(new Person() { Name = name , Score = 0, PersonId = uid, totalAnswered = totalAnsweredB, cyberScore = 0, totalCyber = 0, totalProgramming = 0, totalConversions = 0, totalHardware = 0, totalSoftware = 0, softwareScore = 0, conversionsScore = 0, hardwareScore = 0, programmingScore=0});
+              .PostAsync(new Person() { Name = name , Score = 0, PersonId = uid, totalAnswered = totalAnsweredB, cyberScore = 0, totalCyber = 0, totalProgramming = 0, totalConversions = 0, totalHardware = 0, totalSoftware = 0, softwareScore = 0, conversionsScore = 0, hardwareScore = 0, programmingScore=0, classCode = "", teacher=false});
         }
 
         public async Task<Person> GetPerson(string uid) //getting an account (logging in on logging page)
@@ -90,6 +90,8 @@ namespace CompsciFinal
                 totalConversions = item.Object.totalConversions,
                 programmingScore = item.Object.programmingScore,
                 totalProgramming = item.Object.totalProgramming,
+                classCode = item.Object.classCode,
+                teacher = item.Object.teacher,
 
             }).Where(a => a.PersonId == uid).FirstOrDefault();
         }
@@ -123,7 +125,7 @@ namespace CompsciFinal
               .Child("Persons")
               .Child(person.PersonId)
               .Child(toUpdatePerson.Key)
-              .PutAsync(new Person() { Name = person.Name, Score = newScore, PersonId = person.PersonId, totalAnswered = newTotal, softwareScore=person.softwareScore, programmingScore=person.programmingScore, totalProgramming=person.totalProgramming, totalConversions=person.totalConversions, conversionsScore = person.conversionsScore, cyberScore = person.cyberScore, hardwareScore = person.hardwareScore, totalCyber = person.totalCyber, totalHardware = person.totalHardware, totalSoftware = person.totalSoftware});
+              .PutAsync(new Person() { Name = person.Name, Score = newScore, PersonId = person.PersonId, totalAnswered = newTotal, softwareScore=person.softwareScore, programmingScore=person.programmingScore, totalProgramming=person.totalProgramming, totalConversions=person.totalConversions, conversionsScore = person.conversionsScore, cyberScore = person.cyberScore, hardwareScore = person.hardwareScore, totalCyber = person.totalCyber, totalHardware = person.totalHardware, totalSoftware = person.totalSoftware, classCode = person.classCode, teacher = false});
 
             System.Diagnostics.Debug.Write("-------- Point 2 -------");
         }

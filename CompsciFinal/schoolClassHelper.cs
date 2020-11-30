@@ -14,7 +14,17 @@ namespace CompsciFinal
 
         FirebaseClient firebase = new FirebaseClient("https://compsci-c8f5a.firebaseio.com//"); //get our firebase databases
 
-        public async Task<List<schoolClass>> GetAllSchools() //getting all questions in the database
+        public async void createClient(string auth)
+        {
+            FirebaseOptions options = new FirebaseOptions()
+            {
+                AuthTokenAsyncFactory = async () => auth
+
+            };
+            firebase = new FirebaseClient("https://compsci-c8f5a.firebaseio.com//", options);
+        }
+
+        public async Task<List<schoolClass>> GetAllSchools()
         {
 
             return (await firebase
@@ -23,7 +33,6 @@ namespace CompsciFinal
               {
                   teacherUsername = item.Object.teacherUsername,
                   schoolName = item.Object.schoolName,
-                  Students = item.Object.Students,
                   schoolScore = item.Object.schoolScore,
                   schoolCode = item.Object.schoolCode
                   
@@ -32,15 +41,15 @@ namespace CompsciFinal
               }).ToList();
         }
 
-        public async Task AddschoolClass() //creating new questions
+        public async Task AddschoolClass(schoolClass thisClass) //creating school class
         {
 
             await firebase
               .Child("schoolClasses")
-              .PostAsync(new schoolClass() {  });
+              .PostAsync(new schoolClass() { schoolName = thisClass.schoolName, schoolCode = thisClass.schoolCode, schoolScore = thisClass.schoolScore, teacherUsername = thisClass.teacherUsername, totalSchoolAnswered = thisClass.totalSchoolAnswered });
         }
 
-        public async Task<schoolClass> GetschoolClass(string schoolName) //downloading a specific question (not in use)
+        public async Task<schoolClass> GetschoolClass(string schoolName)
         {
             var allSchools = await GetAllSchools();
             await firebase
@@ -49,19 +58,19 @@ namespace CompsciFinal
             return allSchools.Where(a => a.schoolName == schoolName).FirstOrDefault();
         }
 
-        public async Task UpdateQuestion(string QuestionTextA, string CorrectAnswerA, string IncorrectAnswerA, string IncorrectAnswerB, string IncorrectAnswerC, string tags, int votecountA) //updating a question
+        public async Task UpdateClass(schoolClass thisClass) //updating a question
         {
-            var toUpdateQuestion = (await firebase
-              .Child("Questions")
-              .OnceAsync<Question>()).Where(a => a.Object.QuestionText == QuestionTextA).FirstOrDefault();
+            var toUpdateSchool = (await firebase
+              .Child("schoolClasses")
+              .OnceAsync<schoolClass>()).Where(a => a.Object.schoolCode == thisClass.schoolCode).FirstOrDefault();
 
             await firebase
-              .Child("Questions")
-              .Child(toUpdateQuestion.Key)
-              .PutAsync(new Question() { QuestionText = QuestionTextA, votecount = votecountA, CorrectAnswer = CorrectAnswerA, IncorrectAnswerOne = IncorrectAnswerA, IncorrectAnswerTwo = IncorrectAnswerB, IncorrectAnswerThree = IncorrectAnswerC, tag = tags });
+              .Child("schoolClasses")
+              .Child(toUpdateSchool.Key)
+              .PutAsync(new schoolClass() { totalSchoolAnswered = thisClass.totalSchoolAnswered, schoolCode = thisClass.schoolCode, teacherUsername = thisClass.teacherUsername, schoolScore = thisClass.schoolScore, schoolName = thisClass.schoolName });
         }
 
-        public async Task DeleteQuestion(string QuestionTextA) //deleting a question (not in use)
+        public async Task DeleteQuestion(string QuestionTextA)
         {
             var toDeleteQuestion = (await firebase
               .Child("Questions")

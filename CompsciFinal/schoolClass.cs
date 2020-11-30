@@ -11,9 +11,8 @@ namespace CompsciFinal
 
         public string schoolName { get; set; }
 
-        public List<CompsciFinal.Person> Students { get; set; }
-
         public int schoolScore { get; set; }
+        public int totalSchoolAnswered { get; set; }
 
         public string schoolCode { get; set; }
 

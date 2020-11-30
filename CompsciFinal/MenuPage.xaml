@@ -52,7 +52,7 @@
 
                 <Button
                     
-                    Text="School Creation"
+                    Text="Class Management"
                     TextColor="White"
                     x:Name="schoolCreator"
                     BackgroundColor="#4f494d"

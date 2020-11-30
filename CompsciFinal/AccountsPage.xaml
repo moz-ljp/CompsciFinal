@@ -50,6 +50,18 @@
 
                 </StackLayout>
 
+                <Button x:Name="showHideClassCode" Clicked="showHideClassCode_Clicked"  Text="Set Class Code ▼" Margin="20,0" BackgroundColor="#3d3a3c" TextColor="HotPink"></Button>
+                <StackLayout x:Name="classCodeContainer">
+
+                    <Label Text="Change Class Code" TextColor="White" HorizontalOptions="Center"></Label>
+                    <Entry x:Name="classCodeUsernameTextBox" Placeholder="Username" PlaceholderColor="Gray" TextColor="White" Margin="20,0"></Entry>
+                    <Entry x:Name="classCodeEmailTextBox" Placeholder="Email" PlaceholderColor="Gray" TextColor="White" Margin="20,0"></Entry>
+                    <Entry x:Name="classCodePasswordTextBox" Placeholder="Password" PlaceholderColor="Gray" TextColor="White" Margin="20,0" IsPassword="True"></Entry>
+                    <Entry x:Name="classCodeClassCodeTextBox" Placeholder="Class Code" PlaceholderColor="Gray" TextColor="White" Margin="20,0" IsPassword="False"></Entry>
+                    <Button x:Name="changeClassCode" Clicked="changeClassCode_Clicked"  Text="Set Class Code" BackgroundColor="Red" TextColor="White" Margin="20,0"></Button>
+
+                </StackLayout>
+
 
             </StackLayout>
         </StackLayout>

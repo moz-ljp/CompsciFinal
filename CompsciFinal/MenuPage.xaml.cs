@@ -27,6 +27,15 @@ namespace CompsciFinal
                 userUsername.Text = person.Name;
             else
                 userUsername.Text = "Guest User";
+
+            if (!person.teacher)
+            {
+                schoolCreator.IsVisible = false;
+            }
+            else
+            {
+                schoolCreator.IsVisible = true;
+            }
         }
 
 
@@ -37,7 +46,7 @@ namespace CompsciFinal
 
         private async void schoolCreator_Clicked(object sender, EventArgs e)
         {
-            await Navigation.PushModalAsync(new schoolCreation());
+            await Navigation.PushModalAsync(new schoolCreation(thisPerson, thisAuthLink));
         }
 
         private async void loginPage_Clicked(object sender, EventArgs e)
