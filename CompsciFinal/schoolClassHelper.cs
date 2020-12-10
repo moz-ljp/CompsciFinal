@@ -34,6 +34,7 @@ namespace CompsciFinal
                   teacherUsername = item.Object.teacherUsername,
                   schoolName = item.Object.schoolName,
                   schoolScore = item.Object.schoolScore,
+                  totalSchoolAnswered = item.Object.totalSchoolAnswered,
                   schoolCode = item.Object.schoolCode
                   
 
@@ -49,13 +50,13 @@ namespace CompsciFinal
               .PostAsync(new schoolClass() { schoolName = thisClass.schoolName, schoolCode = thisClass.schoolCode, schoolScore = thisClass.schoolScore, teacherUsername = thisClass.teacherUsername, totalSchoolAnswered = thisClass.totalSchoolAnswered });
         }
 
-        public async Task<schoolClass> GetschoolClass(string schoolName)
+        public async Task<schoolClass> GetSchoolClass(string schoolCode)
         {
             var allSchools = await GetAllSchools();
             await firebase
               .Child("schoolClasses")
               .OnceAsync<schoolClass>();
-            return allSchools.Where(a => a.schoolName == schoolName).FirstOrDefault();
+            return allSchools.Where(a => a.schoolCode == schoolCode).FirstOrDefault();
         }
 
         public async Task UpdateClass(schoolClass thisClass) //updating a question

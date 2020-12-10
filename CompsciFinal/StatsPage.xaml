@@ -8,10 +8,12 @@
              x:Class="CompsciFinal.StatsPage" BackgroundColor="#3d3a3c">
     <ContentPage.Content>
         <StackLayout>
+            <ScrollView>
+                <StackLayout>
 
-            <StackLayout VerticalOptions="Start">
+                <StackLayout VerticalOptions="Start">
                     <Label Text="CompsciApp" HorizontalOptions="Center" TextColor="White" FontSize="30" Margin="0,0,0,0"></Label>
-                <Label Text="" HorizontalOptions="Center" TextColor="White" FontSize="20" Margin="0,0,0,100" x:Name="usernameLabel"></Label>
+                <Label Text="" HorizontalOptions="Center" TextColor="White" FontSize="20" Margin="0,0,0,50" x:Name="usernameLabel"></Label>
                 </StackLayout>
 
             <StackLayout VerticalOptions="Start" >
@@ -53,7 +55,8 @@
                 <local:ChartView x:Name="SuccessRateChartBar" HeightRequest="150" BackgroundColor="#3d3a3c" Margin="20,0"></local:ChartView>
                 
             </StackLayout>
-            
+            </StackLayout>
+            </ScrollView>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

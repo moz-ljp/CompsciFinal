@@ -12,7 +12,8 @@
             
 
                 <StackLayout VerticalOptions="Start">
-                <Label Text="Username" x:Name="usernameLabel" TextColor="White" FontSize="20" HorizontalOptions="Center" Margin="0,0,0,50" ></Label>
+                <Label Text="Username" x:Name="usernameLabel" TextColor="White" FontSize="20" HorizontalOptions="Center" Margin="0,0,0,5" ></Label>
+                <Label Text="classCode" x:Name="classCodeLabel" TextColor="White" FontSize="20" HorizontalOptions="Center" Margin="0,0,0,50"></Label>
             </StackLayout>
 
             <StackLayout VerticalOptions="Center">

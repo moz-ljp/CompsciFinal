@@ -119,6 +119,11 @@ namespace CompsciFinal
 
         }
 
+        public async void updateScore()
+        {
+            await firebaseHelper.UpdatePerson(person, score, totalAnswered);
+        }
+
         public async void answeroneclicked(object sender, EventArgs e)
         {
             string thisanswer = answerone.Text;
@@ -147,7 +152,7 @@ namespace CompsciFinal
                 }
                 if (masterLogged)
                 {
-                    await firebaseHelper.UpdatePerson(person, score, totalAnswered);
+                    updateScore();
                 }
             }
 
@@ -182,7 +187,7 @@ namespace CompsciFinal
                 }
                 if (masterLogged)
                 {
-                    await firebaseHelper.UpdatePerson(person, score, totalAnswered);
+                    updateScore();
                 }
             }
 
@@ -218,7 +223,7 @@ namespace CompsciFinal
 
                 if (masterLogged)
                 {
-                    await firebaseHelper.UpdatePerson(person, score, totalAnswered);
+                    updateScore();
                 }
             }
 
@@ -255,7 +260,7 @@ namespace CompsciFinal
 
                 if (masterLogged)
                 {
-                    await firebaseHelper.UpdatePerson(person, score, totalAnswered);
+                    updateScore();
                 }
             }
 

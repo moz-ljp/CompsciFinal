@@ -34,6 +34,8 @@ namespace CompsciFinal
 
             usernameLabel.Text = person.Name;
 
+            classCodeLabel.Text = "Class Code" + person.classCode;
+
             this.person = person;
 
             passResetContainer.IsVisible = false;

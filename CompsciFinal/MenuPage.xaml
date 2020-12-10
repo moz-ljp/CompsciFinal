@@ -74,6 +74,16 @@
 
                 <Button
                     
+                    Text="Class Statistics Page"
+                    TextColor="White"
+                    x:Name="classStatsPage"
+                    BackgroundColor="#4f494d"
+                    Clicked="classStatsPage_Clicked"
+                    
+                    ></Button>
+
+                <Button
+                    
                     Text="Leader board Page"
                     TextColor="White"
                     x:Name="leaderBoardPage"

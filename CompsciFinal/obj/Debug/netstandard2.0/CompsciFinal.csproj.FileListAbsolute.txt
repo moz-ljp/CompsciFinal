@@ -10,7 +10,6 @@ C:\Users\Moz\source\repos\CompsciFinal\CompsciFinal\CompsciFinal\obj\Debug\netst
 C:\Users\Moz\source\repos\CompsciFinal\CompsciFinal\CompsciFinal\obj\Debug\netstandard2.0\CompsciFinal.pdb
 C:\Users\Moz\source\repos\CompsciFinal\CompsciFinal\CompsciFinal\bin\Debug\netstandard2.0\ref\CompsciFinal.dll
 C:\Users\Moz\source\repos\CompsciFinal\CompsciFinal\CompsciFinal\bin\Debug\netstandard2.0\CompsciFinal.pdb
-C:\Users\Moz\source\repos\CompsciFinal\CompsciFinal\CompsciFinal\obj\Debug\netstandard2.0\shitQuestionBuilder.xaml.g.cs
 C:\Users\Moz\source\repos\CompsciFinal\CompsciFinal\CompsciFinal\obj\Debug\netstandard2.0\MenuPage.xaml.g.cs
 C:\Users\Moz\source\repos\CompsciFinal\CompsciFinal\CompsciFinal\obj\Debug\netstandard2.0\schoolCreation.xaml.g.cs
 C:\Users\Moz\source\repos\CompsciFinal\CompsciFinal\CompsciFinal\obj\Debug\netstandard2.0\LoginPage.xaml.g.cs
@@ -19,3 +18,5 @@ C:\Users\Moz\source\repos\CompsciFinal\CompsciFinal\CompsciFinal\obj\Debug\netst
 C:\Users\Moz\source\repos\CompsciFinal\CompsciFinal\CompsciFinal\obj\Debug\netstandard2.0\LeaderboardPage.xaml.g.cs
 C:\Users\Moz\source\repos\CompsciFinal\CompsciFinal\CompsciFinal\obj\Debug\netstandard2.0\CompsciFinal.csproj.CoreCompileInputs.cache
 C:\Users\Moz\source\repos\CompsciFinal\CompsciFinal\CompsciFinal\obj\Debug\netstandard2.0\XamlC.stamp
+C:\Users\Moz\source\repos\CompsciFinal\CompsciFinal\CompsciFinal\obj\Debug\netstandard2.0\questionBuilder.xaml.g.cs
+C:\Users\Moz\source\repos\CompsciFinal\CompsciFinal\CompsciFinal\obj\Debug\netstandard2.0\ClassStats.xaml.g.cs

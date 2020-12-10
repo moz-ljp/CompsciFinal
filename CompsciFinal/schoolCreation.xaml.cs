@@ -25,9 +25,9 @@ namespace CompsciFinal
 
         Person person;
 
-        schoolClass thisClass;
+        schoolClass thisClass = new schoolClass();
 
-        schoolClassHelper classhelper;
+        schoolClassHelper classhelper = new schoolClassHelper();
 
         FirebaseAuthLink thisAuthLink;
 

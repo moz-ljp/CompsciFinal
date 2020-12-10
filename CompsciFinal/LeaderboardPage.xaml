@@ -12,9 +12,9 @@
 
                 <StackLayout x:Name="topUser">
 
-                    <Label x:Name="topUserLabel" TextColor="Gold" Margin="0,0,10,0" HorizontalOptions="Center" FontSize="30"></Label>
-                    <Label x:Name="secondUserLabel" TextColor="Silver" Margin="0,0,0,0" HorizontalOptions="Center" FontSize="25"></Label>
-                    <Label x:Name="thirdUserLabel" TextColor="#cd7f32" Margin="0,0,0,100" HorizontalOptions="Center" FontSize="20"></Label>
+                    <Label x:Name="topUserLabel" TextColor="Black" BackgroundColor="Gold" Margin="0,0,10,0" HorizontalOptions="Center" FontSize="30"></Label>
+                    <Label x:Name="secondUserLabel" TextColor="Black" BackgroundColor="Silver" Margin="0,0,0,0" HorizontalOptions="Center" FontSize="25"></Label>
+                    <Label x:Name="thirdUserLabel" TextColor="Black" BackgroundColor="#cd7f32"  Margin="0,0,0,100" HorizontalOptions="Center" FontSize="20"></Label>
                     
                 </StackLayout>
                 
@@ -27,7 +27,7 @@
 
                     <ListView.ItemTemplate>
                         <DataTemplate>
-                            <TextCell Text="{Binding Name}" Detail="{Binding Score}"  DetailColor="White" TextColor="White"></TextCell>
+                            <TextCell Text="{Binding Name}" Detail="{Binding Score}" DetailColor="White" TextColor="HotPink"></TextCell>
                         </DataTemplate>
                     </ListView.ItemTemplate>
 

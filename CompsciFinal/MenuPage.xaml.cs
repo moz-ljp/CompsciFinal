@@ -29,13 +29,14 @@ namespace CompsciFinal
                 userUsername.Text = "Guest User";
 
             if (!person.teacher)
-            {
                 schoolCreator.IsVisible = false;
-            }
             else
-            {
                 schoolCreator.IsVisible = true;
-            }
+
+            if (person.classCode != null)
+                classStatsPage.IsVisible = true;
+            else
+                classStatsPage.IsVisible = false;
         }
 
 
@@ -75,6 +76,11 @@ namespace CompsciFinal
         private async void backBTN_Clicked(object sender, EventArgs e)
         {
             await Navigation.PopModalAsync();
+        }
+
+        private async void classStatsPage_Clicked(object sender, EventArgs e)
+        {
+            await Navigation.PushModalAsync(new ClassStats(thisPerson, thisAuthLink));
         }
     }
 }

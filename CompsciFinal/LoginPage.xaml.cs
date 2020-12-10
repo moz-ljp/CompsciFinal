@@ -270,12 +270,14 @@ namespace CompsciFinal
                 
             }
 
-           
+            submitCreate.IsEnabled = true;
+
         }
 
         private void submitCreate_Clicked(object sender, EventArgs e)
         {
             create();
+            submitCreate.IsEnabled = false;
         }
 
         private async void forgotPass_Clicked(object sender, EventArgs e)
