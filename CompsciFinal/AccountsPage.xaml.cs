@@ -42,6 +42,7 @@ namespace CompsciFinal
             usernameChangeContainer.IsVisible = false;
             passwordChangeContainer.IsVisible = false;
             classCodeContainer.IsVisible = false;
+            resetContainer.IsVisible = false;
 
         }
 
@@ -207,6 +208,49 @@ namespace CompsciFinal
                 person.classCode = classCodeClassCodeTextBox.Text;
 
                 await firebaseHelper.UpdatePerson(person, person.Score, person.totalAnswered);
+            }
+        }
+
+        private void showHideResetAcc_Clicked(object sender, EventArgs e)
+        {
+            resetContainer.IsVisible = !resetContainer.IsVisible;
+        }
+
+        private async void resetScores_Clicked(object sender, EventArgs e)
+        {
+            bool decision = await DisplayAlert("Reset Scores", "Are you sure, this cannot be reversed", "OK", "Cancel");
+            if(decision)
+            {
+                var authProvider = new FirebaseAuthProvider(new FirebaseConfig("AIzaSyCGJx-mKV7Ms8BRkJupNe8wvlHwZDJAXMs"));
+
+                var auth = await authProvider.SignInWithEmailAndPasswordAsync(resetScoresEmailTextBox.Text, resetScoresPasswordTextBox.Text);
+
+                authuid = auth.User.LocalId;
+
+                FirebaseAuthLink authLink = await auth.GetFreshAuthAsync();
+
+                firebaseHelper.createClient(authLink.FirebaseToken);
+
+                person.conversionsScore = 0;
+                person.cyberScore = 0;
+                person.hardwareScore = 0;
+                person.programmingScore = 0;
+                person.softwareScore = 0;
+
+                person.totalConversions = 0;
+                person.totalCyber = 0;
+                person.totalHardware = 0;
+                person.totalProgramming = 0;
+                person.totalSoftware = 0;
+
+                await firebaseHelper.UpdatePerson(person, 0, 0);
+
+                await DisplayAlert("Success", "Your scores have been reset", "OK");
+
+                List<string> tags = new List<string>();
+                tags.Add("all");
+
+                await Navigation.PushModalAsync(new MainPage(person, tags, authLink));
             }
         }
     }

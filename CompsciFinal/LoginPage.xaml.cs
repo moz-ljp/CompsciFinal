@@ -72,7 +72,7 @@ namespace CompsciFinal
                 catch (Firebase.Auth.FirebaseAuthException exception)
                 {
 
-                    await DisplayAlert("OK", exception.Reason.ToString(), "OK");
+                    //await DisplayAlert("OK", exception.Reason.ToString(), "OK");
 
                     string errorReason = exception.Reason.ToString();
 

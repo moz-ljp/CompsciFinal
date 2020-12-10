@@ -63,6 +63,17 @@
 
                 </StackLayout>
 
+                <Button x:Name="showHideResetAcc" Clicked="showHideResetAcc_Clicked"  Text="Reset Scores ▼" Margin="20,0" BackgroundColor="#3d3a3c" TextColor="HotPink"></Button>
+                <StackLayout x:Name="resetContainer">
+
+                    <Label Text="Reset Scores" TextColor="White" HorizontalOptions="Center"></Label>
+                    <Entry x:Name="resetScoresUsernameTextBox" Placeholder="Username" PlaceholderColor="Gray" TextColor="White" Margin="20,0"></Entry>
+                    <Entry x:Name="resetScoresEmailTextBox" Placeholder="Email" PlaceholderColor="Gray" TextColor="White" Margin="20,0"></Entry>
+                    <Entry x:Name="resetScoresPasswordTextBox" Placeholder="Password" PlaceholderColor="Gray" TextColor="White" Margin="20,0" IsPassword="True"></Entry>
+                    <Button x:Name="resetScores" Clicked="resetScores_Clicked"  Text="Reset Scores" BackgroundColor="Red" TextColor="White" Margin="20,0"></Button>
+
+                </StackLayout>
+
 
             </StackLayout>
         </StackLayout>
