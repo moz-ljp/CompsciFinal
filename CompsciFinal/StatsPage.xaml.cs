@@ -197,5 +197,10 @@ namespace CompsciFinal
         {
             graphContainer.IsVisible = !graphContainer.IsVisible;
         }
+
+        private async void backBTN_Clicked(object sender, EventArgs e)
+        {
+            await Navigation.PopModalAsync();
+        }
     }
 }

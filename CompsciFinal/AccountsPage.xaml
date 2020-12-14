@@ -76,6 +76,21 @@
 
 
             </StackLayout>
+
+            <StackLayout VerticalOptions="End">
+
+                <Button VerticalOptions="End"
+                        
+                        x:Name="backBTN"
+                        Text="Back"
+                        TextColor="White"
+                        Clicked="backBTN_Clicked"
+                        BackgroundColor="Red"
+                        
+                    ></Button>
+
+            </StackLayout>
+
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

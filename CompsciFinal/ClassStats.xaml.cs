@@ -34,6 +34,8 @@ namespace CompsciFinal
         {
             InitializeComponent();
 
+            this.Content.IsVisible = false;
+
             this.person = person;
             this.authLink = authLink;
 
@@ -127,6 +129,8 @@ namespace CompsciFinal
                 studentPicker.ItemsSource = studentNames;
 
                 sortedOrderedStudents = sortedAndOrderedStudents;
+                this.Content.IsVisible = true;
+
 
             }
 
@@ -242,5 +246,9 @@ namespace CompsciFinal
 
         }
 
+        private async void backBTN_Clicked(object sender, EventArgs e)
+        {
+            await Navigation.PopModalAsync();
+        }
     }
 }

@@ -69,5 +69,10 @@ namespace CompsciFinal
         {
             genCode();
         }
+
+        private async void backBTN_Clicked(object sender, EventArgs e)
+        {
+            await Navigation.PopModalAsync();
+        }
     }
 }

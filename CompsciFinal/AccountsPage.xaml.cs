@@ -253,5 +253,10 @@ namespace CompsciFinal
                 await Navigation.PushModalAsync(new MainPage(person, tags, authLink));
             }
         }
+
+        private async void backBTN_Clicked(object sender, EventArgs e)
+        {
+            await Navigation.PopModalAsync();
+        }
     }
 }
