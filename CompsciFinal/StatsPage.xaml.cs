@@ -14,6 +14,12 @@ using Entry = Microcharts.ChartEntry;
 namespace CompsciFinal
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
+
+    public class Rank
+    {
+        public int requiredScore { get; set; }
+        public string rankName { get; set; }
+    }
     public partial class StatsPage : ContentPage
     {
 
@@ -73,6 +79,7 @@ namespace CompsciFinal
             SuccessRateChartBar.Chart.LabelColor = SKColor.Parse("#ffffff");
 
             topicSorter();
+            calculateRank();
 
         }
 
@@ -98,6 +105,83 @@ namespace CompsciFinal
             worstTopicLabel.Text = successSorted.First().Key;
             secondWorstTopicLabel.Text = successSorted.ElementAt(1).Key;
             
+
+        }
+
+        public void calculateRank()
+        {
+
+            Rank beginner = new Rank();
+            beginner.rankName = "Beginner";
+            beginner.requiredScore = 0;
+
+            Rank novice = new Rank();
+            novice.rankName = "Novice";
+            novice.requiredScore = 100;
+
+            Rank adept = new Rank();
+            adept.rankName = "Adept";
+            adept.requiredScore = 200;
+
+            Rank expert = new Rank();
+            expert.rankName = "Expert";
+            expert.requiredScore = 400;
+
+            Rank master = new Rank();
+            master.rankName = "Master";
+            master.requiredScore = 800;
+
+            Rank god = new Rank();
+            god.rankName = "God";
+            god.requiredScore = 1600;
+
+            Rank genius = new Rank();
+            genius.rankName = "Genius";
+            genius.requiredScore = 3200;
+
+            List<Rank> ranks = new List<Rank>();
+
+            ranks.Add(beginner);
+            ranks.Add(novice);
+            ranks.Add(adept);
+            ranks.Add(expert);
+            ranks.Add(master);
+            ranks.Add(god);
+            ranks.Add(genius);
+
+            int thisScore = person.Score;
+            double successRate = successRateCalculator(thisScore, person.totalAnswered);
+
+            string rank = "";
+
+            int element=0;
+
+            
+            while(thisScore >= ranks[element].requiredScore && element < ranks.Count)
+            {
+                if(ranks[element+1].requiredScore > thisScore)
+                    {
+                    rank = ranks[element].rankName;
+                    System.Diagnostics.Debug.Write("Set Rank");
+                    break;
+                }
+                else
+                {
+                    element++;
+                    System.Diagnostics.Debug.Write("Increased element");
+                }
+            }
+
+            if(successRate < 40)
+            {
+                rank = ranks[element - 1].rankName;
+            }
+            else if(successRate > 60)
+            {
+                rank = ranks[element + 1].rankName;
+            }
+
+            rankLabel.Text = "Rank: " + rank;
 
         }
 

@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:local="clr-namespace:Microcharts.Forms;assembly=Microcharts.Forms"
+             mc:Ignorable="d"
+             x:Class="CompsciFinal.studentViewer" BackgroundColor="#3d3a3c">
+    <ContentPage.Content>
+        <StackLayout>
+            <StackLayout VerticalOptions="Start">
+                <Label Text="" FontSize="40" x:Name="studentNameLabel" TextColor="White" HorizontalOptions="Center"></Label>
+                <Label Text="" FontSize="30" x:Name="studentRank" TextColor="White" HorizontalOptions="Center"></Label>
+            </StackLayout>
+
+            <StackLayout HorizontalOptions="Center">
+                <StackLayout Grid.Row="1" Orientation="Horizontal" Spacing="10" HorizontalOptions="Center">
+
+                <Label Text="Success Rate:" TextColor="White" FontSize="20" HorizontalOptions="Center"></Label>
+                <Label Text="0" TextColor="White" FontSize="20" HorizontalOptions="Center" x:Name="successRateLabel"></Label>
+
+            </StackLayout>
+
+            <StackLayout Grid.Row="1" Orientation="Horizontal" Spacing="10" HorizontalOptions="Center">
+                <Label Text="Total Score:" TextColor="White" FontSize="20" HorizontalOptions="Center"></Label>
+                <Label Text="0" TextColor="White" FontSize="20" HorizontalOptions="Center" x:Name="scoreLabel"></Label>
+            </StackLayout>
+
+            <StackLayout Grid.Row="1" Orientation="Horizontal" Spacing="10" HorizontalOptions="Center">
+                <Label Text="Best Topic:" TextColor="White" FontSize="20" HorizontalOptions="Center"></Label>
+                <Label Text="0" TextColor="White" FontSize="20" HorizontalOptions="Center" x:Name="bestTopicLabel"></Label>
+            </StackLayout>
+            <StackLayout Grid.Row="1" Orientation="Horizontal" Spacing="10" HorizontalOptions="Center">
+                <Label Text="Worst Topic:" TextColor="White" FontSize="20" HorizontalOptions="Center"></Label>
+                <Label Text="0" TextColor="White" FontSize="20" HorizontalOptions="Center" x:Name="worstTopicLabel"></Label>
+            </StackLayout>
+            <StackLayout Grid.Row="1" Orientation="Horizontal" Spacing="10" HorizontalOptions="Center">
+                <Label Text="Second Worst Topic:" TextColor="White" FontSize="20" HorizontalOptions="Center"></Label>
+                <Label Text="0" TextColor="White" FontSize="20" HorizontalOptions="Center" x:Name="secondWorstTopicLabel"></Label>
+            </StackLayout>
+            </StackLayout>
+            <Button x:Name="showHideGraphs" Clicked="showHideGraphs_Clicked"  Text="Show Graphs ▼" Margin="20,0" BackgroundColor="#3d3a3c" TextColor="HotPink"></Button>
+            <StackLayout x:Name="graphContainer">
+
+                <local:ChartView x:Name="SuccessRateChartRadial" HeightRequest="150" BackgroundColor="#3d3a3c" Margin="20,0"></local:ChartView>
+                <local:ChartView x:Name="SuccessRateChartBar" HeightRequest="150" BackgroundColor="#3d3a3c" Margin="20,0"></local:ChartView>
+
+            </StackLayout>
+
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

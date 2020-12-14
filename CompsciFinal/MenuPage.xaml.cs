@@ -33,10 +33,10 @@ namespace CompsciFinal
             else
                 schoolCreator.IsVisible = true;
 
-            if (person.classCode != null)
-                classStatsPage.IsVisible = true;
-            else
+            if(person.classCode == null)
+            {
                 classStatsPage.IsVisible = false;
+            }
         }
 
 

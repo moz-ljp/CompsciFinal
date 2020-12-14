@@ -10,8 +10,8 @@
 
             <StackLayout VerticalOptions="Start">
 
-                <Label Text="" x:Name="schoolNameLabel" TextColor="White" FontSize="40"></Label>
-                <Label x:Name="schoolCodeLabel" TextColor="White" FontSize="30"></Label>
+                <Label Text="" x:Name="schoolNameLabel" TextColor="White" FontSize="40" HorizontalOptions="Center"></Label>
+                <Label x:Name="schoolCodeLabel" TextColor="White" FontSize="30" HorizontalOptions="Center" Margin="0,0,0,20"></Label>
                 
             </StackLayout>
 
@@ -19,16 +19,32 @@
 
                 <Label x:Name="studentCountLabel" TextColor="White" Text="Student Count Label"></Label>
                 <Label x:Name="totalClassScoreLabel" TextColor="White" Text="Total Class Score Label"></Label>
+                <Label x:Name="bestStudentLabel" TextColor="White" Text="Top Student"></Label>
                 
             </StackLayout>
+
+            
+
+            <Button x:Name="selectStudent" BackgroundColor="Red" TextColor="White" Text="Select student" Clicked="selectStudent_Clicked"></Button>
 
             <StackLayout VerticalOptions="End">
 
+                
                 <Label x:Name="thisStudentPosInClass" TextColor="White" Text="Your position"></Label>
                 
             </StackLayout>
-            
-            
+
+            <Picker
+          x:Name="studentPicker"
+                Title="Students"
+                TitleColor="HotPink"
+          TextColor="White"
+                Margin="20,0,20,0"
+                
+               
+
+          ></Picker>
+
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
