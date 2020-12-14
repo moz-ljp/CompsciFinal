@@ -48,7 +48,7 @@ namespace CompsciFinal
 
             string hexCode = code.ToString("X2");
 
-            thisClass.schoolCode = hexCode;
+            thisClass.schoolCode = idField.Text;
             thisClass.teacherUsername = person.Name;
             thisClass.schoolScore = person.Score;
             thisClass.totalSchoolAnswered = person.totalAnswered;

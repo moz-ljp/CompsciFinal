@@ -52,11 +52,14 @@ namespace CompsciFinal
 
         public async Task<schoolClass> GetSchoolClass(string schoolCode)
         {
+            System.Diagnostics.Debug.Write("-------- Point 1 -------");
             var allSchools = await GetAllSchools();
+            System.Diagnostics.Debug.Write("-------- Point 2 -------");
             await firebase
               .Child("schoolClasses")
               .OnceAsync<schoolClass>();
             return allSchools.Where(a => a.schoolCode == schoolCode).FirstOrDefault();
+            System.Diagnostics.Debug.Write("-------- Point 3 -------");
         }
 
         public async Task UpdateClass(schoolClass thisClass) //updating a question

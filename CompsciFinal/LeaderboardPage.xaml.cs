@@ -41,15 +41,15 @@ namespace CompsciFinal
         public async void getAllPersons()
         {
             base.OnAppearing();
-            var authProvider = new FirebaseAuthProvider(new FirebaseConfig("AIzaSyCGJx-mKV7Ms8BRkJupNe8wvlHwZDJAXMs"));
+            //var authProvider = new FirebaseAuthProvider(new FirebaseConfig("AIzaSyCGJx-mKV7Ms8BRkJupNe8wvlHwZDJAXMs"));
 
-            var auth = await authProvider.SignInAnonymouslyAsync();
+            //var auth = await authProvider.SignInAnonymouslyAsync();
 
             await loadingBar.ProgressTo(.2, 250, Easing.Linear);
 
-            authuid = auth.User.LocalId;
+            //authuid = auth.User.LocalId;
 
-            FirebaseAuthLink authLink = await auth.GetFreshAuthAsync();
+            //FirebaseAuthLink authLink = await auth.GetFreshAuthAsync();
 
             firebaseHelper.createClient(authLink.FirebaseToken);
 
