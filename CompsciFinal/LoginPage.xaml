@@ -23,10 +23,10 @@
                 </FlexLayout>
                 
                 <Button Text="I Forgot My Password" x:Name="forgotPass" HorizontalOptions="Center" Clicked="forgotPass_Clicked" TextColor="White" BackgroundColor="#3d3a3c"></Button>
-            
+                
         </StackLayout>
 
-            <ProgressBar x:Name="loadingBar" />
+            <ProgressBar x:Name="loadingBar" Margin="20,0" />
 
 
         </StackLayout>

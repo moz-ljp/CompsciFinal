@@ -34,11 +34,11 @@ namespace CompsciFinal
 
             usernameLabel.Text = person.Name;
 
-            classCodeLabel.Text = "Class Code" + person.classCode;
+            classCodeLabel.Text = "Class Code" + person.classCode; //set class code label
 
             this.person = person;
 
-            passResetContainer.IsVisible = false;
+            passResetContainer.IsVisible = false; //hide contains until requested through buttons
             usernameChangeContainer.IsVisible = false;
             passwordChangeContainer.IsVisible = false;
             classCodeContainer.IsVisible = false;
@@ -46,18 +46,18 @@ namespace CompsciFinal
 
         }
 
-        private void showHideResetPass_Clicked(object sender, EventArgs e)
+        private void showHideResetPass_Clicked(object sender, EventArgs e) //these control whether to show their respective containers
         {
             passResetContainer.IsVisible = !passResetContainer.IsVisible;
         }
 
-        private async void resetEmail_Clicked(object sender, EventArgs e)
+        private async void resetEmail_Clicked(object sender, EventArgs e) //send a reset email
         {
             var authProvider = new FirebaseAuthProvider(new FirebaseConfig("AIzaSyCGJx-mKV7Ms8BRkJupNe8wvlHwZDJAXMs"));
 
-            await authProvider.SendPasswordResetEmailAsync(emailTextBox.Text);
+            await authProvider.SendPasswordResetEmailAsync(emailTextBox.Text); //grab the email from the text box
 
-            await DisplayAlert("Success", "Reset Email Sent", "OK");
+            await DisplayAlert("Success", "Reset Email Sent", "OK"); //send the reset request
         }
 
         private void showHidechangeUsername_Clicked(object sender, EventArgs e)
@@ -65,17 +65,17 @@ namespace CompsciFinal
             usernameChangeContainer.IsVisible = !usernameChangeContainer.IsVisible;
         }
 
-        private async void changeUsername_Clicked(object sender, EventArgs e)
+        private async void changeUsername_Clicked(object sender, EventArgs e) //change username
         {
             string username = usernameTextBox.Text;
             string email = usernameEmailTextBox.Text;
             string password = usernamePasswordTextBox.Text;
 
-            if(usernameTextBoxNEW.Text.Length > 2)
+            if(usernameTextBoxNEW.Text.Length > 2) //validate username length
             {
                 var authProvider = new FirebaseAuthProvider(new FirebaseConfig("AIzaSyCGJx-mKV7Ms8BRkJupNe8wvlHwZDJAXMs"));
 
-                var auth = await authProvider.SignInWithEmailAndPasswordAsync(email, password);
+                var auth = await authProvider.SignInWithEmailAndPasswordAsync(email, password); //log in with firebase auth
 
                 authuid = auth.User.LocalId;
 
@@ -83,11 +83,11 @@ namespace CompsciFinal
 
                 firebaseHelper.createClient(authLink.FirebaseToken);
 
-                Person currentPerson = await firebaseHelper.GetPerson(authuid);
+                Person currentPerson = await firebaseHelper.GetPerson(authuid); //get the users current account
 
-                currentPerson.Name = usernameTextBoxNEW.Text;
+                currentPerson.Name = usernameTextBoxNEW.Text; //update the users object
 
-                await firebaseHelper.UpdatePerson(currentPerson, currentPerson.Score, currentPerson.totalAnswered);
+                await firebaseHelper.UpdatePerson(currentPerson, currentPerson.Score, currentPerson.totalAnswered); //reupload to database
 
                 List<string> chosenTags = new List<string>();
                 chosenTags.Add("all");
@@ -110,28 +110,59 @@ namespace CompsciFinal
             passwordChangeContainer.IsVisible = !passwordChangeContainer.IsVisible;
         }
 
-        private async void changePassword_Clicked(object sender, EventArgs e)
+        private async void changePassword_Clicked(object sender, EventArgs e) //for changing password
         {
             string username = passwordUsernameTextBox.Text;
             string email = passwordEmailTextBox.Text;
             string password = changePassPasswordTextBox.Text;
             string newpassword = changePassPasswordTextBoxNew.Text;
 
-            if(passwordValidation(newpassword))
+            if(passwordValidation(newpassword)) //validates password to ensure it meets standards
             {
-                var authProvider = new FirebaseAuthProvider(new FirebaseConfig("AIzaSyCGJx-mKV7Ms8BRkJupNe8wvlHwZDJAXMs"));
+                try
+                {
+                    var authProvider = new FirebaseAuthProvider(new FirebaseConfig("AIzaSyCGJx-mKV7Ms8BRkJupNe8wvlHwZDJAXMs"));
 
-                var auth = await authProvider.SignInWithEmailAndPasswordAsync(email, password);
+                    var auth = await authProvider.SignInWithEmailAndPasswordAsync(email, password);
 
-                authuid = auth.User.LocalId;
+                    authuid = auth.User.LocalId;
 
-                FirebaseAuthLink authLink = await auth.GetFreshAuthAsync();
+                    FirebaseAuthLink authLink = await auth.GetFreshAuthAsync();
 
-                firebaseHelper.createClient(authLink.FirebaseToken);
+                    firebaseHelper.createClient(authLink.FirebaseToken);
 
-                await authProvider.ChangeUserPassword(auth.FirebaseToken, newpassword);
+                    await authProvider.ChangeUserPassword(auth.FirebaseToken, newpassword); //for changing the users password with firebase auth
 
-                await DisplayAlert("Success!", "Your password has been changed", "OK");
+                    await DisplayAlert("Success!", "Your password has been changed", "OK");
+                }
+                catch (Firebase.Auth.FirebaseAuthException exception)
+                {
+                    string errorReason = exception.Reason.ToString();
+                    if (errorReason == "UnknownEmailAddress" || errorReason == "InvalidEmailAddress") //invalid email
+                    {
+                        await DisplayAlert("Error", "Invalid Email", "OK");
+                        passwordEmailTextBox.Text = "";
+                    }
+
+                    else if (errorReason == "WrongPassword") //Incorrect password
+                    {
+                        await DisplayAlert("Error", "Incorrect Password", "OK");
+                        changePassPasswordTextBox.Text = "";
+                    }
+
+                    else if (errorReason == "MissingPassword") //Empty password field
+                    {
+                        await DisplayAlert("Erorr", "Missing Password", "OK");
+                    }
+
+                    else if (errorReason == "TooManyAttemptsTryLater") //Account is being spammed so cooldown
+                    {
+                        await DisplayAlert("Error", "You have attempted to log in too many times, try again later", "OK");
+                        passwordEmailTextBox.Text = "";
+                        changePassPasswordTextBox.Text = "";
+                    }
+                }
+
             }
             else
             {
@@ -146,7 +177,7 @@ namespace CompsciFinal
         {
             const int minLen = 6;
 
-            bool meetsLengthReq = pass.Length >= 6;
+            bool meetsLengthReq = pass.Length >= minLen;
             bool hasUpperCase = false;
             bool hasLowerCase = false;
             bool hasDecimals = false;
@@ -190,24 +221,54 @@ namespace CompsciFinal
             classCodeContainer.IsVisible = !classCodeContainer.IsVisible;
         }
 
-        private async void changeClassCode_Clicked(object sender, EventArgs e)
+        private async void changeClassCode_Clicked(object sender, EventArgs e) //for changing class codes
         {
             bool decision = await DisplayAlert("Set class code", "Are you sure?", "OK", "Cancel");
             if(decision)
             {
-                var authProvider = new FirebaseAuthProvider(new FirebaseConfig("AIzaSyCGJx-mKV7Ms8BRkJupNe8wvlHwZDJAXMs"));
+                try
+                {
+                    var authProvider = new FirebaseAuthProvider(new FirebaseConfig("AIzaSyCGJx-mKV7Ms8BRkJupNe8wvlHwZDJAXMs"));
 
-                var auth = await authProvider.SignInWithEmailAndPasswordAsync(classCodeEmailTextBox.Text, classCodePasswordTextBox.Text);
+                    var auth = await authProvider.SignInWithEmailAndPasswordAsync(classCodeEmailTextBox.Text, classCodePasswordTextBox.Text);
 
-                authuid = auth.User.LocalId;
+                    authuid = auth.User.LocalId;
 
-                FirebaseAuthLink authLink = await auth.GetFreshAuthAsync();
+                    FirebaseAuthLink authLink = await auth.GetFreshAuthAsync();
 
-                firebaseHelper.createClient(authLink.FirebaseToken);
+                    firebaseHelper.createClient(authLink.FirebaseToken);
 
-                person.classCode = classCodeClassCodeTextBox.Text;
+                    person.classCode = classCodeClassCodeTextBox.Text; //change object class code
 
-                await firebaseHelper.UpdatePerson(person, person.Score, person.totalAnswered);
+                    await firebaseHelper.UpdatePerson(person, person.Score, person.totalAnswered); //update with firebase database
+                }
+                catch(Firebase.Auth.FirebaseAuthException exception){
+                    string errorReason = exception.Reason.ToString();
+                    if (errorReason == "UnknownEmailAddress" || errorReason == "InvalidEmailAddress") //invalid email
+                    {
+                        await DisplayAlert("Error", "Invalid Email", "OK");
+                        classCodeEmailTextBox.Text = "";
+                    }
+
+                    else if (errorReason == "WrongPassword") //Incorrect password
+                    {
+                        await DisplayAlert("Error", "Incorrect Password", "OK");
+                        classCodePasswordTextBox.Text = "";
+                    }
+
+                    else if (errorReason == "MissingPassword") //Empty password field
+                    {
+                        await DisplayAlert("Erorr", "Missing Password", "OK");
+                    }
+
+                    else if (errorReason == "TooManyAttemptsTryLater") //Account is being spammed so cooldown
+                    {
+                        await DisplayAlert("Error", "You have attempted to log in too many times, try again later", "OK");
+                        classCodeEmailTextBox.Text = "";
+                        classCodePasswordTextBox.Text = "";
+                    }
+                }
+                
             }
         }
 
@@ -216,7 +277,7 @@ namespace CompsciFinal
             resetContainer.IsVisible = !resetContainer.IsVisible;
         }
 
-        private async void resetScores_Clicked(object sender, EventArgs e)
+        private async void resetScores_Clicked(object sender, EventArgs e) //for resetting user scores
         {
             bool decision = await DisplayAlert("Reset Scores", "Are you sure, this cannot be reversed", "OK", "Cancel");
             if(decision)
@@ -231,7 +292,7 @@ namespace CompsciFinal
 
                 firebaseHelper.createClient(authLink.FirebaseToken);
 
-                person.conversionsScore = 0;
+                person.conversionsScore = 0; //set all scores to 0
                 person.cyberScore = 0;
                 person.hardwareScore = 0;
                 person.programmingScore = 0;
@@ -243,7 +304,7 @@ namespace CompsciFinal
                 person.totalProgramming = 0;
                 person.totalSoftware = 0;
 
-                await firebaseHelper.UpdatePerson(person, 0, 0);
+                await firebaseHelper.UpdatePerson(person, 0, 0); //update with database
 
                 await DisplayAlert("Success", "Your scores have been reset", "OK");
 

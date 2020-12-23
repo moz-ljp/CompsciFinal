@@ -116,13 +116,14 @@
 
             <StackLayout VerticalOptions="End">
 
-                <Button VerticalOptions="End"
+                <Button
                         
                         x:Name="backBTN"
                         Text="Back"
                         TextColor="White"
                         Clicked="backBTN_Clicked"
                         BackgroundColor="Red"
+                        VerticalOptions="EndAndExpand"
                         
                     ></Button>
 

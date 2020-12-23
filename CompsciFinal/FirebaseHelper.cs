@@ -68,8 +68,24 @@ namespace CompsciFinal
 
             await firebase
               .Child("Persons").Child(uid)
-              .PostAsync(new Person() { Name = name , Score = 0, PersonId = uid, totalAnswered = totalAnsweredB, cyberScore = 0, totalCyber = 0, totalProgramming = 0, totalConversions = 0, totalHardware = 0, totalSoftware = 0, softwareScore = 0, conversionsScore = 0, hardwareScore = 0, programmingScore=0, classCode = "", teacher=false});
+              .PostAsync(new Person() { 
+                  Name = name ,
+                  Score = 0, PersonId = uid,
+                  totalAnswered = totalAnsweredB,
+                  cyberScore = 0,
+                  totalCyber = 0,
+                  totalProgramming = 0,
+                  totalConversions = 0,
+                  totalHardware = 0,
+                  totalSoftware = 0,
+                  softwareScore = 0,
+                  conversionsScore = 0,
+                  hardwareScore = 0,
+                  programmingScore=0,
+                  classCode = "",
+                  teacher=false});
         }
+
 
         public async Task<Person> GetPerson(string uid) //getting an account (logging in on logging page)
         {
@@ -84,7 +100,7 @@ namespace CompsciFinal
                 totalCyber = item.Object.totalCyber,
                 softwareScore = item.Object.softwareScore,
                 totalSoftware = item.Object.totalSoftware,
-                hardwareScore = item.Object.totalHardware,
+                hardwareScore = item.Object.hardwareScore,
                 totalHardware = item.Object.totalHardware,
                 conversionsScore = item.Object.conversionsScore,
                 totalConversions = item.Object.totalConversions,

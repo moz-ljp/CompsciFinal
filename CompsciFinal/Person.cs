@@ -12,8 +12,6 @@ namespace CompsciFinal
         public int Score { get; set; }
         public int totalAnswered { get; set; }
 
-        //individual scores :(
-
         public int hardwareScore { get; set; }
         public int totalHardware { get; set; }
         public int softwareScore { get; set; }

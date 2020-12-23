@@ -21,3 +21,4 @@ C:\Users\Moz\source\repos\CompsciFinal\CompsciFinal\CompsciFinal\obj\Debug\netst
 C:\Users\Moz\source\repos\CompsciFinal\CompsciFinal\CompsciFinal\obj\Debug\netstandard2.0\questionBuilder.xaml.g.cs
 C:\Users\Moz\source\repos\CompsciFinal\CompsciFinal\CompsciFinal\obj\Debug\netstandard2.0\ClassStats.xaml.g.cs
 C:\Users\Moz\source\repos\CompsciFinal\CompsciFinal\CompsciFinal\obj\Debug\netstandard2.0\studentViewer.xaml.g.cs
+C:\Users\Moz\source\repos\CompsciFinal\CompsciFinal\CompsciFinal\obj\Debug\netstandard2.0\testPage.xaml.g.cs

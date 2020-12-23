@@ -8,8 +8,9 @@
     <ContentPage.Content>
         <StackLayout>
 
+            <ScrollView>
+                <StackLayout>
 
-            
 
                 <StackLayout VerticalOptions="Start">
                 <Label Text="Username" x:Name="usernameLabel" TextColor="White" FontSize="20" HorizontalOptions="Center" Margin="0,0,0,5" ></Label>
@@ -17,13 +18,13 @@
             </StackLayout>
 
             <StackLayout VerticalOptions="Center">
-
+            
                 <Button x:Name="showHideResetPass" Clicked="showHideResetPass_Clicked"  Text="Reset Password ▼" Margin="20,0" BackgroundColor="#3d3a3c" TextColor="HotPink"></Button>
                 <StackLayout x:Name="passResetContainer">
 
                     <Label Text="Reset Password" TextColor="White" HorizontalOptions="Center"></Label>
-                    <Entry x:Name="emailTextBox" Placeholder="Email" PlaceholderColor="Gray" TextColor="White" Margin="20,0"></Entry>
-                    <Button x:Name="resetEmail" Clicked="resetEmail_Clicked" Text="Reset email" BackgroundColor="Red" TextColor="White" Margin="20,0"></Button>
+                    <Entry x:Name="emailTextBox" Placeholder="Email" PlaceholderColor="Gray" TextColor="White" Margin="20,0" Keyboard="Email"></Entry>
+                    <Button x:Name="resetEmail" Clicked="resetEmail_Clicked" Text="Reset Password" BackgroundColor="Red" TextColor="White" Margin="20,0"></Button>
 
                 </StackLayout>
 
@@ -33,7 +34,7 @@
                     <Label Text="Change Username" TextColor="White" HorizontalOptions="Center"></Label>
                     <Entry x:Name="usernameTextBox" Placeholder="Username" PlaceholderColor="Gray" TextColor="White" Margin="20,0"></Entry>
                     <Entry x:Name="usernameTextBoxNEW" Placeholder="New Username" PlaceholderColor="Gray" TextColor="White" Margin="20,0"></Entry>
-                    <Entry x:Name="usernameEmailTextBox" Placeholder="Email" PlaceholderColor="Gray" TextColor="White" Margin="20,0"></Entry>
+                    <Entry x:Name="usernameEmailTextBox" Placeholder="Email" PlaceholderColor="Gray" TextColor="White" Margin="20,0" Keyboard="Email"></Entry>
                     <Entry x:Name="usernamePasswordTextBox" Placeholder="Password" PlaceholderColor="Gray" TextColor="White" Margin="20,0" IsPassword="True"></Entry>
                     <Button x:Name="changeUsername" Clicked="changeUsername_Clicked"  Text="Change Username" BackgroundColor="Red" TextColor="White" Margin="20,0"></Button>
 
@@ -44,7 +45,7 @@
 
                     <Label Text="Change Password" TextColor="White" HorizontalOptions="Center"></Label>
                     <Entry x:Name="passwordUsernameTextBox" Placeholder="Username" PlaceholderColor="Gray" TextColor="White" Margin="20,0"></Entry>
-                    <Entry x:Name="passwordEmailTextBox" Placeholder="Email" PlaceholderColor="Gray" TextColor="White" Margin="20,0"></Entry>
+                    <Entry x:Name="passwordEmailTextBox" Placeholder="Email" PlaceholderColor="Gray" TextColor="White" Margin="20,0" Keyboard="Email"></Entry>
                     <Entry x:Name="changePassPasswordTextBox" Placeholder="Password" PlaceholderColor="Gray" TextColor="White" Margin="20,0" IsPassword="True"></Entry>
                     <Entry x:Name="changePassPasswordTextBoxNew" Placeholder="New Password" PlaceholderColor="Gray" TextColor="White" Margin="20,0" IsPassword="True"></Entry>
                     <Button x:Name="changePassword" Clicked="changePassword_Clicked"  Text="Change Password" BackgroundColor="Red" TextColor="White" Margin="20,0"></Button>
@@ -56,9 +57,9 @@
 
                     <Label Text="Change Class Code" TextColor="White" HorizontalOptions="Center"></Label>
                     <Entry x:Name="classCodeUsernameTextBox" Placeholder="Username" PlaceholderColor="Gray" TextColor="White" Margin="20,0"></Entry>
-                    <Entry x:Name="classCodeEmailTextBox" Placeholder="Email" PlaceholderColor="Gray" TextColor="White" Margin="20,0"></Entry>
+                    <Entry x:Name="classCodeEmailTextBox" Placeholder="Email" PlaceholderColor="Gray" TextColor="White" Margin="20,0" Keyboard="Email"></Entry>
                     <Entry x:Name="classCodePasswordTextBox" Placeholder="Password" PlaceholderColor="Gray" TextColor="White" Margin="20,0" IsPassword="True"></Entry>
-                    <Entry x:Name="classCodeClassCodeTextBox" Placeholder="Class Code" PlaceholderColor="Gray" TextColor="White" Margin="20,0" IsPassword="False"></Entry>
+                    <Entry x:Name="classCodeClassCodeTextBox" Placeholder="Class Code" PlaceholderColor="Gray" TextColor="White" Margin="20,0" IsPassword="False" Keyboard="Numeric"></Entry>
                     <Button x:Name="changeClassCode" Clicked="changeClassCode_Clicked"  Text="Set Class Code" BackgroundColor="Red" TextColor="White" Margin="20,0"></Button>
 
                 </StackLayout>
@@ -68,7 +69,7 @@
 
                     <Label Text="Reset Scores" TextColor="White" HorizontalOptions="Center"></Label>
                     <Entry x:Name="resetScoresUsernameTextBox" Placeholder="Username" PlaceholderColor="Gray" TextColor="White" Margin="20,0"></Entry>
-                    <Entry x:Name="resetScoresEmailTextBox" Placeholder="Email" PlaceholderColor="Gray" TextColor="White" Margin="20,0"></Entry>
+                    <Entry x:Name="resetScoresEmailTextBox" Placeholder="Email" PlaceholderColor="Gray" TextColor="White" Margin="20,0" Keyboard="Email"></Entry>
                     <Entry x:Name="resetScoresPasswordTextBox" Placeholder="Password" PlaceholderColor="Gray" TextColor="White" Margin="20,0" IsPassword="True"></Entry>
                     <Button x:Name="resetScores" Clicked="resetScores_Clicked"  Text="Reset Scores" BackgroundColor="Red" TextColor="White" Margin="20,0"></Button>
 
@@ -86,11 +87,13 @@
                         TextColor="White"
                         Clicked="backBTN_Clicked"
                         BackgroundColor="Red"
+                        Margin="20,0"
                         
                     ></Button>
 
             </StackLayout>
-
+            </StackLayout>
+            </ScrollView>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

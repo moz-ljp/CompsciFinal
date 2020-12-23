@@ -12,42 +12,43 @@
 
                 <StackLayout x:Name="topUser">
 
-                    <Label x:Name="topUserLabel" TextColor="Black" BackgroundColor="Gold" Margin="0,0,10,0" HorizontalOptions="Center" FontSize="30"></Label>
-                    <Label x:Name="secondUserLabel" TextColor="Black" BackgroundColor="Silver" Margin="0,0,0,0" HorizontalOptions="Center" FontSize="25"></Label>
-                    <Label x:Name="thirdUserLabel" TextColor="Black" BackgroundColor="#cd7f32"  Margin="0,0,0,100" HorizontalOptions="Center" FontSize="20"></Label>
+                    <Label x:Name="topUserLabel" TextColor="Black" BackgroundColor="Gold" Margin="0,0,10,0" HorizontalOptions="Center" FontSize="30" WidthRequest="200" HorizontalTextAlignment="Center"></Label>
+                    <Label x:Name="secondUserLabel" TextColor="Black" BackgroundColor="Silver" Margin="0,0,0,0" HorizontalOptions="Center" FontSize="25" WidthRequest="300" HorizontalTextAlignment="Center"></Label>
+                    <Label x:Name="thirdUserLabel" TextColor="Black" BackgroundColor="#cd7f32"  Margin="0,0,0,100" HorizontalOptions="Center" FontSize="20" WidthRequest="400" HorizontalTextAlignment="Center" ></Label>
                     
                 </StackLayout>
                 
             </StackLayout>
 
-
-            <StackLayout x:Name="restOfBoard">
+            <ScrollView>
+                <StackLayout x:Name="restOfBoard">
 
                 <ListView x:Name="leaderBoardList" HorizontalOptions="Center">
 
                     <ListView.ItemTemplate>
                         <DataTemplate>
-                            <TextCell Text="{Binding Name}" Detail="{Binding Score}" DetailColor="White" TextColor="HotPink"></TextCell>
-                        </DataTemplate>
+                                <TextCell Text="{Binding Name}" Detail="{Binding Score}" DetailColor="White" TextColor="HotPink"></TextCell>
+                            </DataTemplate>
                     </ListView.ItemTemplate>
 
                 </ListView>
                 
             </StackLayout>
-
+            </ScrollView>
             <Button
                         
                         x:Name="backBTN"
                         Text="Back"
                         TextColor="White"
                         Clicked="backBTN_Clicked"
+                Margin="20,0"
                         BackgroundColor="Red"
                         
                     ></Button>
 
             <ProgressBar
                 x:Name="loadingBar"
-                
+                Margin="20,0"
                 ></ProgressBar>
 
         </StackLayout>

@@ -25,17 +25,12 @@
 
                 </StackLayout>
 
-                <StackLayout Grid.Row="1" Orientation="Horizontal" Spacing="10" HorizontalOptions="Center">
-                    <Label Text="Total Score:" TextColor="White" FontSize="20" HorizontalOptions="Center"></Label>
-                    <Label Text="0" TextColor="White" FontSize="20" HorizontalOptions="Center" x:Name="scoreLabel"></Label>
-                </StackLayout>
+                        <StackLayout Grid.Row="1" Orientation="Horizontal" Spacing="10" HorizontalOptions="Center">
+                            <Label Text="Total Score:" TextColor="White" FontSize="20" HorizontalOptions="Center"></Label>
+                            <Label Text="0" TextColor="White" FontSize="20" HorizontalOptions="Center" x:Name="scoreLabel"></Label>
+                        </StackLayout>
 
-                <StackLayout Grid.Row="1" Orientation="Horizontal" Spacing="10" HorizontalOptions="Center">
-                    <Label Text="Position:" TextColor="White" FontSize="20" HorizontalOptions="Center"></Label>
-                    <Label Text="0" TextColor="White" FontSize="20" HorizontalOptions="Center" x:Name="positionLabel"></Label>
-                </StackLayout>
-
-                <StackLayout Grid.Row="1" Orientation="Horizontal" Spacing="10" HorizontalOptions="Center">
+                        <StackLayout Grid.Row="1" Orientation="Horizontal" Spacing="10" HorizontalOptions="Center">
                     <Label Text="Best Topic:" TextColor="White" FontSize="20" HorizontalOptions="Center"></Label>
                     <Label Text="0" TextColor="White" FontSize="20" HorizontalOptions="Center" x:Name="bestTopicLabel"></Label>
                 </StackLayout>

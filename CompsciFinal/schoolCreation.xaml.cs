@@ -44,19 +44,47 @@ namespace CompsciFinal
         public async void genCode()
         {
 
-            int code = Convert.ToInt32(idField.Text);
+            //int code = Convert.ToInt32(idField.Text);
 
-            string hexCode = code.ToString("X2");
+            //string hexCode = code.ToString("X2");
 
-            thisClass.schoolCode = idField.Text;
+            thisClass.schoolCode = idField.Text; //grabs all the variables into a schoolClass object
             thisClass.teacherUsername = person.Name;
             thisClass.schoolScore = person.Score;
             thisClass.totalSchoolAnswered = person.totalAnswered;
             thisClass.schoolName = schoolNameField.Text;
 
-            classhelper.createClient(thisAuthLink.FirebaseToken);
+            classhelper.createClient(thisAuthLink.FirebaseToken); //create a firebase client
 
-            await classhelper.AddschoolClass(thisClass);
+            List<schoolClass> allClasses = new List<schoolClass>(); //list for all classes
+
+            allClasses = await classhelper.GetAllSchools(); //get all of the classes into list
+
+            bool uniqueID = true; //this will only set to false if another id the same is found
+
+            foreach(schoolClass x in allClasses) //for every class in the list
+            {
+                if (x.schoolCode == idField.Text) //if the id fields are the same
+                {
+                    await DisplayAlert("Error", "ID Code taken", "Ok"); //that id is taken
+                    idField.Text = String.Empty;
+                    uniqueID = false;
+                }
+                    
+                    
+            }
+
+            try
+            {
+                if(uniqueID)
+                    await classhelper.AddschoolClass(thisClass);
+            }
+            catch
+            {
+                
+            }
+
+            
             
         }
 

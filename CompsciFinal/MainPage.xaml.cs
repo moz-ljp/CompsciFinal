@@ -30,90 +30,90 @@ namespace CompsciFinal
         ISimpleAudioPlayer correctSound = CrossSimpleAudioPlayer.CreateSimpleAudioPlayer();
         ISimpleAudioPlayer incorrectSound = CrossSimpleAudioPlayer.CreateSimpleAudioPlayer();
 
-        int count = 0;
+        bool questionsDownloaded = false; //used to determine whether questions have been downloaded
 
-        int prev = 0;
+        int prevQuestion = 0; //stores the index of the last question used
 
-        int score;
+        int score; //stores the current score
 
-        int totalAnswered = 0;
+        int totalAnswered = 0; //stores the total questions answered
 
-        int currentrandom;
+        int currentrandom; //stores the current random number used to choose a question
 
-        int currentvotecount = 0;
+        int currentvotecount = 0; //stores the current vote count of a question
 
-        int total;
+        int totalQuestionAmount; //stores the total amount of questions
 
-        string correctAnswer;
+        string correctAnswer; //stores the string of the correct answer for comparison
 
-        bool solved = false;
+        bool solved = false; //determines whether the question has been solved
 
-        bool questionsAcquired = false;
+        bool questionsAcquired = false; //determiens whether questions are ready for use
 
-        public string thisusername = "";
+        public string thisusername = ""; //stores the users current username
 
-        List<CompsciFinal.Question> Questions = new List<CompsciFinal.Question>();
+        List<CompsciFinal.Question> Questions = new List<CompsciFinal.Question>(); //stores the list of questions for use
 
-        List<CompsciFinal.Question> preQuestions = new List<CompsciFinal.Question>();
+        List<CompsciFinal.Question> preQuestions = new List<CompsciFinal.Question>(); //stores the unsorted list of questions
 
-        List<string> chosenTags = new List<string>();
+        List<string> chosenTags = new List<string>(); //stores the tags chosen by the user
 
-        public string authuid;
+        public string authuid; //stores the authuid provided by firebase
 
-        public string thisuid;
+        public string thisuid; //stores the uid of the user
 
-        string thisTag;
+        string thisTag; // stores the tag of the current question
 
-        Person person;
+        Person person; //stores the person object for the user
 
-        bool masterLogged = false;
+        bool masterLogged = false; //stores whether the user is logged in or not
 
-        FirebaseAuthLink thisauthLink;
+        FirebaseAuthLink thisauthLink; //stores the authentication link delivered from firebase
 
-        FirebaseClient firebase = new FirebaseClient("https://compsci-c8f5a.firebaseio.com//");
+        FirebaseClient firebase = new FirebaseClient("https://compsci-c8f5a.firebaseio.com//"); //stores the link to firebase database
 
-        private const string BaseUrl = "https://compsci-c8f5a.firebaseio.com//";
-
-        public List<string> newTagsList = new List<string>();
-        public List<int> newTagScore = new List<int>();
-        public List<int> newTagTotal = new List<int>();
-
-        //private ChildQuery _query;
+        private const string BaseUrl = "https://compsci-c8f5a.firebaseio.com//"; //stores the link to firebase database
 
         public MainPage(Person user, List<String> Tags, FirebaseAuthLink authLink)
         {
             InitializeComponent();
 
-            Navigation.PopToRootAsync();
+            if(Tags.Count < 1) //if the list is somehow empty
+                Tags.Add("all"); //add the all flag
 
-            NavigationPage.SetHasNavigationBar(this, false);
+            System.Diagnostics.Debug.Write("Hardware:", user.hardwareScore.ToString());
+
+
+            Navigation.PopToRootAsync(); //clears any open pages
+
+            NavigationPage.SetHasNavigationBar(this, false); //removes the top nav bar on android for appearances
             
-            thisuid = user.PersonId;
+            thisuid = user.PersonId; //sets up the uid of the person into a variable
 
-            correctSound.Load("correct.wav");
+            correctSound.Load("correct.wav"); //assigns sounds for the audio players
             incorrectSound.Load("incorrect.wav");
 
 
-            thisauthLink = authLink;
+            thisauthLink = authLink; //pulls authLink from local to global variable
 
-            person = user;
+            person = user; //pulls user from local to script global
 
-            totalAnswered = user.totalAnswered;
+            totalAnswered = user.totalAnswered; //gets total answered question count
 
-            thisusername = user.Name;
+            thisusername = user.Name; //gets username
 
-            chosenTags = Tags;
+            chosenTags = Tags; //gets chosen tags
 
-            usernameLabel.Text = thisusername;
+            usernameLabel.Text = thisusername; //sets the username label to the username
 
-            score = user.Score;
+            score = user.Score; //gets the users score from obj
 
-            counterLabel.Text = score.ToString();
+            counterLabel.Text = score.ToString(); //sets the score label
 
-            if (thisuid != null)
+            if (thisuid != null) //check if logged in by seeing if the user has an ID
             {
-                masterLogged = true;
-                firebaseHelper.createClient(authLink.FirebaseToken);
+                masterLogged = true; //if they are, set to true.
+                firebaseHelper.createClient(authLink.FirebaseToken); //and create a client using the provided auth link
 
             }
 
@@ -121,38 +121,37 @@ namespace CompsciFinal
 
         public async void updateScore()
         {
-            await firebaseHelper.UpdatePerson(person, score, totalAnswered);
+            await firebaseHelper.UpdatePerson(person, score, totalAnswered); //updates the score using the firebase helper script
         }
 
-        public async void answeroneclicked(object sender, EventArgs e)
+        public async void answeroneclicked(object sender, EventArgs e) //all four are the same so only one will be commented
         {
-            string thisanswer = answerone.Text;
+            string thisAnswer = answerone.Text; //gets the users chosen answer from the buttons text
 
-            if (solved == false)
+            if (solved == false) //checks to make sure the user hasnt already answered
             {
-                totalAnswered += 1;
+                totalAnswered += 1; //increases the total amount of questions the user has answered locally
 
-                if (thisanswer == correctAnswer)
+                if (thisAnswer == correctAnswer) //checks if the answer provided is correct
                 {
-                    resultLabel.Text = "Correct";
+                    resultLabel.Text = "Correct"; //changes colours and words to give user feedback
                     resultLabel.TextColor = Color.Lime;
-                    score += 1;
-                    increaseTagScore(true);
-                    playAudio(true);
-                    //incScore();
-                    counterLabel.Text = score.ToString();
+                    score += 1; //increase score
+                    increaseTagScore(true); //actually where score is increased per tag
+                    playAudio(true); //plays audio from another method
+                    counterLabel.Text = score.ToString(); //reset label to reflect new score
                 }
                 else
                 {
-                    counterLabel.Text = score.ToString();
-                    resultLabel.Text = "Incorrect";
-                    increaseTagScore(false);
-                    playAudio(false);
+                    counterLabel.Text = score.ToString(); //reset score just in case it changes
+                    resultLabel.Text = "Incorrect"; //change visuals to feed back to user
+                    increaseTagScore(false); //do not increase the scores
+                    playAudio(false); //play a negative sound
                     resultLabel.TextColor = Color.Red;
                 }
-                if (masterLogged)
+                if (masterLogged) //if the user is logged in
                 {
-                    updateScore();
+                    updateScore(); //update the users score with firebase
                 }
             }
 
@@ -161,13 +160,13 @@ namespace CompsciFinal
 
         public async void answertwoclicked(object sender, EventArgs e)
         {
-            string thisanswer = answertwo.Text;
+            string thisAnswer = answertwo.Text;
 
             if (solved == false)
             {
                 totalAnswered += 1;
 
-                if (thisanswer == correctAnswer)
+                if (thisAnswer == correctAnswer)
                 {
                     resultLabel.Text = "Correct";
                     resultLabel.TextColor = Color.Lime;
@@ -196,13 +195,13 @@ namespace CompsciFinal
 
         public async void answerthreeclicked(object sender, EventArgs e)
         {
-            string thisanswer = answerthree.Text;
+            string thisAnswer = answerthree.Text;
 
             if (solved == false)
             {
                 totalAnswered += 1;
 
-                if (thisanswer == correctAnswer)
+                if (thisAnswer == correctAnswer)
                 {
                     resultLabel.Text = "Correct";
                     resultLabel.TextColor = Color.Lime;
@@ -232,13 +231,13 @@ namespace CompsciFinal
 
         public async void answerfourclicked(object sender, EventArgs e)
         {
-            string thisanswer = answerfour.Text;
+            string thisAnswer = answerfour.Text;
 
             if (solved == false)
             {
                 totalAnswered += 1;
 
-                if (thisanswer == correctAnswer)
+                if (thisAnswer == correctAnswer)
                 {
                     resultLabel.Text = "Correct";
                     resultLabel.TextColor = Color.Lime;
@@ -267,13 +266,13 @@ namespace CompsciFinal
             solved = true;
         }
 
-        public async void increaseTagScore(bool correct)
+        public async void increaseTagScore(bool correct) //for increasing individual tags score
         {
-            if(thisTag == "hardware")
+            if(thisTag == "hardware") //check which tag it is
             {
-                if(correct)
-                    person.hardwareScore++;
-                person.totalHardware++;
+                if(correct) //if the answer is correct
+                    person.hardwareScore++; //increase the score
+                person.totalHardware++; //always increase the total
             }
             else if(thisTag == "software")
             {
@@ -305,130 +304,110 @@ namespace CompsciFinal
             }
         }
 
-        public async void playAudio(bool correct)
+        public async void playAudio(bool correct) //plays audio players
         {
-            if (correct)
-                correctSound.Play();
-            else
-                incorrectSound.Play();
+            if (correct) //if the answer was correct
+                correctSound.Play(); //play a positive sound
+            else //otherwise
+                incorrectSound.Play(); //play a negative sound
 
         }
 
 
 
-        private async void nextquestionclicked(object sender, EventArgs e)
+        private async void nextquestionclicked(object sender, EventArgs e) //occurs when user requests a new question
         {
-            /*
-            try
-            {
-                await firebaseHelper.UpdatePerson("moz", authuid, 10);
-                await DisplayAlert("Nice", "It worked", "Ok");
-            }
-            catch
-            {
-                await DisplayAlert("Fucked", "sorry mate, database fucked", "Ok");
-            }
-            
-            */
-            //await Navigation.PushModalAsync(new RootPage());
 
-            if (count == 0)
+            if (questionsDownloaded == false) //if questions have not already been downloaded
             {
 
                 try // on first run, download all the questions into a list 
                 {
-                    var questions = await questionsHelper.GetAllQuestions();
+                    var questions = await questionsHelper.GetAllQuestions(); //get all of the questions into a list
 
                     preQuestions = questions.ToList();
 
-                    count = 1;
+                    questionsDownloaded = true; //state that all questions have been acquired
 
                     //await DisplayAlert("alert", chosenTags[0].ToString(), "ok");
 
                     if(!chosenTags.Contains("all")) //if chosentags does not contain all
                     {
                         
-                        foreach (Question x in preQuestions)
+                        foreach (Question x in preQuestions) //for every question 
                         {
 
-                            if (chosenTags.Contains(x.tag.ToUpper()))
+                            if (chosenTags.Contains(x.tag.ToUpper())) //if the tag is in the users desired tag list
                                 {
                                 
-                                Questions.Add(x);
+                                Questions.Add(x); //add that question to our list
                                 //Debug.Write("Question added " + x.tag);
 
                             }
                         }
                     }
-                    else
+                    else //otherwise
                     {
-                        Questions = questions.ToList();
+                        Questions = questions.ToList(); //assign the full questions list to our list for use
                         Debug.Write("No tags");
                     }
-                    //Questions = questions.ToList();
-                    total = Questions.Count();
-                    questionsAcquired = true;
+                    totalQuestionAmount = Questions.Count(); //count the questions through
+                    questionsAcquired = true; //state again that they are acquired for other purpose
                 }
-                catch
+                catch //if an error occurs, report it as inability to access database due to internet connection - this should be the only error that can feasibly occur.
                 {
                     await DisplayAlert("Failed to load questions", "Check your internet access", "OK"); //if we cant get the questions, assume its a network problem
                 }
 
             }
 
-            if (questionsAcquired)
+            if (questionsAcquired) //if the questions are ready
                 {
 
                 //await DisplayAlert("Alert", Questions[0].tag, "ok");
 
-                Random rnd = new Random();
-                    int randommessage = rnd.Next(0, total); //choose a random question
+                Random rnd = new Random(); //create a new random class obj
+                int randomQ= rnd.Next(0, totalQuestionAmount); //choose a random question
 
 
-                    if (prev == randommessage) //if the random question is the same as the previous one, dont show it. might do this in a stack at some point
+                    if (prevQuestion == randomQ) //if the random question is the same as the previous one, dont show it. might do this in a stack at some point
                     {
-                        if (randommessage < (total - 1))
+                        if (randomQ < (totalQuestionAmount - 1)) //if the current message is going to cause an error
                         {
-                            randommessage += 1;
+                            randomQ += 1; //increase it by 1 so it is in the list
                         }
                         else
                         {
-                            randommessage -= 1;
+                            randomQ -= 1; //otherwise, decrease by one
                         }
 
                     }
 
-                currentrandom = randommessage;
-
-                
-
-                Console.WriteLine(randommessage);
-
-
+                currentrandom = randomQ; //assign to appropriate variable
 
                     //string question = releases[randommessage]["question"].ToString();
 
-                    string question = Questions[randommessage].QuestionText.ToString(); //set all relevant text to relevant info
+                    string question = Questions[randomQ].QuestionText.ToString(); //set all relevant text to relevant info - question
 
-                    string answer = Questions[randommessage].CorrectAnswer.ToString();
+                    string answer = Questions[randomQ].CorrectAnswer.ToString(); //correct answer
 
-                    string incorrectA = Questions[randommessage].IncorrectAnswerOne.ToString();
+                    string incorrectA = Questions[randomQ].IncorrectAnswerOne.ToString(); //first incorrect
 
-                    string incorrectB = Questions[randommessage].IncorrectAnswerTwo.ToString();
+                    string incorrectB = Questions[randomQ].IncorrectAnswerTwo.ToString(); //second incorrect
 
-                    string incorrectC = Questions[randommessage].IncorrectAnswerThree.ToString();
+                    string incorrectC = Questions[randomQ].IncorrectAnswerThree.ToString(); //third incorret
 
-                if (masterLogged)
-                    thisTag = Questions[randommessage].tag.ToLower();
-                else
-                    thisTag = null;
+                if (masterLogged) //if they are logged in
+                    thisTag = Questions[randomQ].tag.ToLower(); //get the question tag
+                else //otherwise
+                    thisTag = null; //there is no need
                     
 
                     solved = false; //say that the current question is not solved.
 
                     int rndPos = rnd.Next(0, 4); //choose a random position for the correct answer to the question, otherwise the correct answer would always be present in one place
 
-                    if (rndPos == 0)
+                    if (rndPos == 0) //jumble the answers by shifting them based upon the random
                     {
                         answerone.Text = answer;
                         answertwo.Text = incorrectA;
@@ -458,37 +437,36 @@ namespace CompsciFinal
                     }
 
 
-                    correctAnswer = answer;
+                    correctAnswer = answer; //assign the correct answer
 
-                    questionLabel.Text = question;
+                    questionLabel.Text = question; //set the question
 
-                    resultLabel.Text = "";
+                    resultLabel.Text = ""; //clear the question feedback
 
-                    prev = randommessage;
+                    prevQuestion = randomQ; //assign prev question value for checks to ensure there are no repeating questions
                 }
 
 
             
         }
 
-        private async void menuButton(object sender, EventArgs e)
+        private async void menuButton(object sender, EventArgs e) //button for the menu
         {
-            //Person thisperson = await firebaseHelper.GetPerson(person.PersonId);
-            person.Score = score;
-            person.totalAnswered = totalAnswered;
-            await Navigation.PushModalAsync(new MenuPage(person, thisauthLink));
+            person.Score = score; //gets the current score
+            person.totalAnswered = totalAnswered; //and total answered
+            await Navigation.PushModalAsync(new MenuPage(person, thisauthLink)); //passes to menu page with person object and the auth link
         }
 
-        private async void downVote_Clicked(object sender, EventArgs e)
+        private async void downVote_Clicked(object sender, EventArgs e) //down vote button (thumbs down)
         {
             //await DisplayAlert("ok", Questions[currentrandom].QuestionText, "ok");
-            bool answer = await DisplayAlert("Vote Down Question", "Are you sure?", "Yes", "No");
+            bool answer = await DisplayAlert("Vote Down Question", "Are you sure?", "Yes", "No"); //if they want to (check)
             if(answer == true)
-            {
+            { //reduce the questions vote count
                 await questionsHelper.UpdateQuestion(questionLabel.Text, Questions[currentrandom].CorrectAnswer, Questions[currentrandom].IncorrectAnswerOne, Questions[currentrandom].IncorrectAnswerTwo, Questions[currentrandom].IncorrectAnswerThree, Questions[currentrandom].tag, (Questions[currentrandom].votecount - 1));
-                if (Questions[currentrandom].votecount-1 < 1)
+                if (Questions[currentrandom].votecount-1 < 1) //if the questions vote count falls below 1
                 {
-                    await questionsHelper.DeleteQuestion(questionLabel.Text);
+                    await questionsHelper.DeleteQuestion(questionLabel.Text); //delete it
                 }
             }
             

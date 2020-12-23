@@ -23,10 +23,22 @@ namespace CompsciFinal
             InitializeComponent();
             thisPerson = person;
             thisAuthLink = authlink;
-            if (person.PersonId != null)
-                userUsername.Text = person.Name;
-            else
-                userUsername.Text = "Guest User";
+            if (person.PersonId != null) //if the user has an id, they are logged in
+            {
+                userUsername.Text = person.Name; //so display pages
+                questionBuilder.IsVisible = true;
+                statsPage.IsVisible = true;
+                leaderBoardPage.IsVisible = true;
+            }
+                
+            else //otherwise, they arent logged in
+            {
+                userUsername.Text = "Guest User"; //so not display
+                questionBuilder.IsVisible = false;
+                statsPage.IsVisible = false;
+                leaderBoardPage.IsVisible = false;
+            }
+                
 
             if (!person.teacher)
                 schoolCreator.IsVisible = false;
@@ -37,6 +49,8 @@ namespace CompsciFinal
             {
                 classStatsPage.IsVisible = false;
             }
+
+            
         }
 
 
@@ -82,5 +96,6 @@ namespace CompsciFinal
         {
             await Navigation.PushModalAsync(new ClassStats(thisPerson, thisAuthLink));
         }
+
     }
 }

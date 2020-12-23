@@ -31,7 +31,7 @@
 
 
                 <Label x:Name="thisStudentPosInClass" TextColor="White" Text="Your position" Margin="20,0" HorizontalOptions="Center"></Label>
-                <Button x:Name="selectStudent" BackgroundColor="Red" TextColor="White" Text="Select student" Clicked="selectStudent_Clicked" Margin="20,0" HorizontalOptions="Center"></Button>
+                
 
             </StackLayout>
 
@@ -47,6 +47,8 @@
 
           ></Picker>
 
+            <Button x:Name="selectStudent" BackgroundColor="Red" TextColor="White" Text="Select student" Clicked="selectStudent_Clicked" Margin="20,0" HorizontalOptions="Center"></Button>
+
             <StackLayout VerticalOptions="End">
 
                 <Button VerticalOptions="End"
@@ -56,6 +58,7 @@
                         TextColor="White"
                         Clicked="backBTN_Clicked"
                         BackgroundColor="Red"
+                        Margin="20,0"
                         
                     ></Button>
 
