@@ -72,7 +72,10 @@ namespace CompsciFinal
         private async void statsPage_Clicked(object sender, EventArgs e)
         {
             if (thisPerson.PersonId != null)
-                await Navigation.PushModalAsync(new StatsPage(thisPerson));
+                if (thisPerson.Score > 20)
+                    await Navigation.PushModalAsync(new StatsPage(thisPerson));
+                else
+                    await DisplayAlert("Error", "Please answer more questions before attempting to view stats.", "Ok");
             else
                 await DisplayAlert("Error", "You must be logged in to view statistics", "OK");
         }

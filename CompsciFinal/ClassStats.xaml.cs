@@ -71,23 +71,23 @@ namespace CompsciFinal
 
                 foreach (string x in ids)
                 {
-                    studentList.Add(await firebaseHelper.GetPerson(x));
+                    studentList.Add(await firebaseHelper.GetPerson(x)); //get every student into a list
                     //await DisplayAlert("ok", x, "ok");
                 }
 
                 foreach(Person x in studentList)
                 {
-                    if(x.classCode == thisClass.schoolCode)
+                    if(x.classCode == thisClass.schoolCode) // if the student has this classes class code
                     {
-                        sortedStudentList.Add(x);
+                        sortedStudentList.Add(x); //add them to a different list
                     }
                 }
 
                 int globalScore = 0;
 
-                foreach(Person x in sortedStudentList)
+                foreach(Person x in sortedStudentList) //for every student
                 {
-                    globalScore += x.Score;
+                    globalScore += x.Score; //add their score to the total tally
                 }
 
                 studentCountLabel.Text = "Students in class: " + sortedStudentList.Count().ToString();
@@ -96,7 +96,7 @@ namespace CompsciFinal
 
                 var personsVar = sortedStudentList;
 
-                var OrderedPersons = personsVar.OrderBy(f => f.Score).Reverse();
+                var OrderedPersons = personsVar.OrderBy(f => f.Score).Reverse(); //sort the students by score
 
                 List<Person> sortedAndOrderedStudents = new List<Person>();
 
@@ -106,27 +106,27 @@ namespace CompsciFinal
 
                 foreach(Person x in sortedAndOrderedStudents)
                 {
-                    if(x == person)
+                    if(x == person) //get this users position in the list of students
                     {
                         currentStudentPos = sortedAndOrderedStudents.IndexOf(x);
                     }
                 }
 
-                currentStudentPos += 1;
+                currentStudentPos += 1; // add one (as the list begins at index 0)
 
-                thisStudentPosInClass.Text = "Your position in the class: " +currentStudentPos.ToString();
+                thisStudentPosInClass.Text = "Your position in the class: " +currentStudentPos.ToString(); //display pos
 
-                bestStudentLabel.Text = "Best student in class: "+ sortedAndOrderedStudents.First<Person>().Name;
+                bestStudentLabel.Text = "Best student in class: "+ sortedAndOrderedStudents.First<Person>().Name; //display best student
 
-                List<string> studentNames = new List<string>();
+                List<string> studentNames = new List<string>(); //list for student names
 
-                foreach (Person x in sortedAndOrderedStudents)
+                foreach (Person x in sortedAndOrderedStudents) //get every student name into list
                 { 
                     studentNames.Add(x.Name);
 
                 }
 
-                studentPicker.ItemsSource = studentNames;
+                studentPicker.ItemsSource = studentNames; //set the source for an item picker.
 
                 sortedOrderedStudents = sortedAndOrderedStudents;
                 this.Content.IsVisible = true;
@@ -146,14 +146,19 @@ namespace CompsciFinal
         {
             string studentName = studentPicker.SelectedItem.ToString();
 
-            foreach(Person x in sortedOrderedStudents)
+            if(studentName != null)
             {
-                if(x.Name == studentName)
+                foreach (Person x in sortedOrderedStudents)
                 {
-                    string rank = calculateRank(x);
-                    openStats(x, rank);
+                    if (x.Name == studentName)
+                    {
+                        string rank = calculateRank(x);
+                        openStats(x, rank);
+                    }
                 }
             }
+
+            
 
         }
 

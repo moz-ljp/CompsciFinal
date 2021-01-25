@@ -24,9 +24,13 @@ namespace CompsciFinal
 
         private const string BaseUrl = "https://compsci-c8f5a.firebaseio.com//";
 
+        string thisFailedValEmail;
+
         string authuid;
 
         string thisFailedVal;
+
+        string classCodeFailedVal;
 
         public AccountsPage(Person person)
         {
@@ -34,7 +38,7 @@ namespace CompsciFinal
 
             usernameLabel.Text = person.Name;
 
-            classCodeLabel.Text = "Class Code" + person.classCode; //set class code label
+            classCodeLabel.Text = "Class Code: " + person.classCode; //set class code label
 
             this.person = person;
 
@@ -43,6 +47,44 @@ namespace CompsciFinal
             passwordChangeContainer.IsVisible = false;
             classCodeContainer.IsVisible = false;
             resetContainer.IsVisible = false;
+
+        }
+
+        public bool emailValidation(string email) //validation for email
+        {
+
+            bool hasAtSymbol = false; //ensuring it has the at symbol
+            bool onlyOneAt = false; //and checking it only has the @ symbol once
+            bool meetsLengthReq = email.Length > 3;
+
+            int atCount = 0; //counts the amount of @ in the email
+
+            foreach (char x in email) //for every character in the email address
+            {
+                if (x.ToString() == "@") //if it is the @ sign
+                {
+                    hasAtSymbol = true; //assign to true
+                    onlyOneAt = true; //assign to true
+                    atCount++; //increase the count of the amount of @
+                }
+
+            }
+
+            if (atCount > 1) //if this number is more than 1, @ count is more than 1
+                onlyOneAt = false; //so say that the @ count being less than 2 is false
+
+
+            if (hasAtSymbol && onlyOneAt && meetsLengthReq) //check they are both true
+                return true;
+            else
+
+                if (!hasAtSymbol)
+                thisFailedValEmail = "Email does not conatain @ symbol";
+            else if (!onlyOneAt)
+                thisFailedValEmail = "Email contains more than one @ symbol";
+
+            return false;
+
 
         }
 
@@ -55,9 +97,17 @@ namespace CompsciFinal
         {
             var authProvider = new FirebaseAuthProvider(new FirebaseConfig("AIzaSyCGJx-mKV7Ms8BRkJupNe8wvlHwZDJAXMs"));
 
-            await authProvider.SendPasswordResetEmailAsync(emailTextBox.Text); //grab the email from the text box
+            if(emailValidation(emailTextBox.Text))
+            {
+                await authProvider.SendPasswordResetEmailAsync(emailTextBox.Text); //grab the email from the text box
 
-            await DisplayAlert("Success", "Reset Email Sent", "OK"); //send the reset request
+                await DisplayAlert("Success", "Reset Email Sent", "OK"); //send the reset request
+            }
+            else
+            {
+                await DisplayAlert("Error", thisFailedValEmail, "OK");
+            }
+
         }
 
         private void showHidechangeUsername_Clicked(object sender, EventArgs e)
@@ -152,7 +202,7 @@ namespace CompsciFinal
 
                     else if (errorReason == "MissingPassword") //Empty password field
                     {
-                        await DisplayAlert("Erorr", "Missing Password", "OK");
+                        await DisplayAlert("Error", "Missing Password", "OK");
                     }
 
                     else if (errorReason == "TooManyAttemptsTryLater") //Account is being spammed so cooldown
@@ -221,53 +271,90 @@ namespace CompsciFinal
             classCodeContainer.IsVisible = !classCodeContainer.IsVisible;
         }
 
+        public bool classCodeValidation(string classCode)
+        {
+            const int minLen = 4;
+
+            bool meetsLengthReq = classCode.Length >= minLen;
+            bool doesNotContainSymbols = true;
+
+            foreach(char x in classCode)
+            {
+                if (char.IsPunctuation(x) || char.IsSymbol(x))
+                    doesNotContainSymbols = false;
+            }
+
+            if (doesNotContainSymbols && meetsLengthReq)
+                return true;
+            else
+            {
+                if (!doesNotContainSymbols)
+                    classCodeFailedVal = "Class codes cannot contain symbols";
+                else
+                    classCodeFailedVal = "Class codes must be longer than 3 characters";
+
+                return false;
+            }
+
+        }
+
         private async void changeClassCode_Clicked(object sender, EventArgs e) //for changing class codes
         {
             bool decision = await DisplayAlert("Set class code", "Are you sure?", "OK", "Cancel");
             if(decision)
             {
-                try
+                if(classCodeValidation(classCodeClassCodeTextBox.Text))
                 {
-                    var authProvider = new FirebaseAuthProvider(new FirebaseConfig("AIzaSyCGJx-mKV7Ms8BRkJupNe8wvlHwZDJAXMs"));
+                    try
+                    {
+                        var authProvider = new FirebaseAuthProvider(new FirebaseConfig("AIzaSyCGJx-mKV7Ms8BRkJupNe8wvlHwZDJAXMs"));
 
-                    var auth = await authProvider.SignInWithEmailAndPasswordAsync(classCodeEmailTextBox.Text, classCodePasswordTextBox.Text);
+                        var auth = await authProvider.SignInWithEmailAndPasswordAsync(classCodeEmailTextBox.Text, classCodePasswordTextBox.Text);
 
-                    authuid = auth.User.LocalId;
+                        authuid = auth.User.LocalId;
 
-                    FirebaseAuthLink authLink = await auth.GetFreshAuthAsync();
+                        FirebaseAuthLink authLink = await auth.GetFreshAuthAsync();
 
-                    firebaseHelper.createClient(authLink.FirebaseToken);
+                        firebaseHelper.createClient(authLink.FirebaseToken);
 
-                    person.classCode = classCodeClassCodeTextBox.Text; //change object class code
+                        person.classCode = classCodeClassCodeTextBox.Text; //change object class code
 
-                    await firebaseHelper.UpdatePerson(person, person.Score, person.totalAnswered); //update with firebase database
+                        await firebaseHelper.UpdatePerson(person, person.Score, person.totalAnswered); //update with firebase database
+                    }
+                    catch (Firebase.Auth.FirebaseAuthException exception)
+                    {
+                        string errorReason = exception.Reason.ToString();
+                        if (errorReason == "UnknownEmailAddress" || errorReason == "InvalidEmailAddress") //invalid email
+                        {
+                            await DisplayAlert("Error", "Invalid Email", "OK");
+                            classCodeEmailTextBox.Text = "";
+                        }
+
+                        else if (errorReason == "WrongPassword") //Incorrect password
+                        {
+                            await DisplayAlert("Error", "Incorrect Password", "OK");
+                            classCodePasswordTextBox.Text = "";
+                        }
+
+                        else if (errorReason == "MissingPassword") //Empty password field
+                        {
+                            await DisplayAlert("Erorr", "Missing Password", "OK");
+                        }
+
+                        else if (errorReason == "TooManyAttemptsTryLater") //Account is being spammed so cooldown
+                        {
+                            await DisplayAlert("Error", "You have attempted to log in too many times, try again later", "OK");
+                            classCodeEmailTextBox.Text = "";
+                            classCodePasswordTextBox.Text = "";
+                        }
+                    }
                 }
-                catch(Firebase.Auth.FirebaseAuthException exception){
-                    string errorReason = exception.Reason.ToString();
-                    if (errorReason == "UnknownEmailAddress" || errorReason == "InvalidEmailAddress") //invalid email
-                    {
-                        await DisplayAlert("Error", "Invalid Email", "OK");
-                        classCodeEmailTextBox.Text = "";
-                    }
-
-                    else if (errorReason == "WrongPassword") //Incorrect password
-                    {
-                        await DisplayAlert("Error", "Incorrect Password", "OK");
-                        classCodePasswordTextBox.Text = "";
-                    }
-
-                    else if (errorReason == "MissingPassword") //Empty password field
-                    {
-                        await DisplayAlert("Erorr", "Missing Password", "OK");
-                    }
-
-                    else if (errorReason == "TooManyAttemptsTryLater") //Account is being spammed so cooldown
-                    {
-                        await DisplayAlert("Error", "You have attempted to log in too many times, try again later", "OK");
-                        classCodeEmailTextBox.Text = "";
-                        classCodePasswordTextBox.Text = "";
-                    }
+                else
+                {
+                    await DisplayAlert("Error", classCodeFailedVal, "Ok");
+                    classCodeClassCodeTextBox.Text = string.Empty;
                 }
+                
                 
             }
         }
@@ -280,7 +367,10 @@ namespace CompsciFinal
         private async void resetScores_Clicked(object sender, EventArgs e) //for resetting user scores
         {
             bool decision = await DisplayAlert("Reset Scores", "Are you sure, this cannot be reversed", "OK", "Cancel");
-            if(decision)
+
+            bool fieldCheck = ((emailValidation(resetScoresEmailTextBox.Text) && passwordValidation(resetScoresPasswordTextBox.Text) && resetScoresUsernameTextBox.Text.Length > 2)); 
+
+            if(decision && fieldCheck)
             {
                 var authProvider = new FirebaseAuthProvider(new FirebaseConfig("AIzaSyCGJx-mKV7Ms8BRkJupNe8wvlHwZDJAXMs"));
 
@@ -312,6 +402,15 @@ namespace CompsciFinal
                 tags.Add("all");
 
                 await Navigation.PushModalAsync(new MainPage(person, tags, authLink));
+            }
+            else
+            {
+                if (!passwordValidation(resetScoresPasswordTextBox.Text))
+                    await DisplayAlert("Error", thisFailedVal, "Ok");
+                else if (!emailValidation(resetScoresEmailTextBox.Text))
+                    await DisplayAlert("Error", thisFailedValEmail, "Ok");
+                else
+                    await DisplayAlert("Error", "Username invalid", "Ok");
             }
         }
 

@@ -42,12 +42,16 @@ namespace CompsciFinal
               }).ToList();
         }
 
-        public async Task AddschoolClass(schoolClass thisClass) //creating school class
+        public async Task addSchoolClass(schoolClass thisClass) //creating school class
         {
 
             await firebase
               .Child("schoolClasses")
-              .PostAsync(new schoolClass() { schoolName = thisClass.schoolName, schoolCode = thisClass.schoolCode, schoolScore = thisClass.schoolScore, teacherUsername = thisClass.teacherUsername, totalSchoolAnswered = thisClass.totalSchoolAnswered });
+              .PostAsync(new schoolClass() { schoolName = thisClass.schoolName,
+                  schoolCode = thisClass.schoolCode,
+                  schoolScore = thisClass.schoolScore,
+                  teacherUsername = thisClass.teacherUsername,
+                  totalSchoolAnswered = thisClass.totalSchoolAnswered });
         }
 
         public async Task<schoolClass> GetSchoolClass(string schoolCode)

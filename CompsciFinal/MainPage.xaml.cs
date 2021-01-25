@@ -30,6 +30,8 @@ namespace CompsciFinal
         ISimpleAudioPlayer correctSound = CrossSimpleAudioPlayer.CreateSimpleAudioPlayer();
         ISimpleAudioPlayer incorrectSound = CrossSimpleAudioPlayer.CreateSimpleAudioPlayer();
 
+        bool votedDown = false;
+
         bool questionsDownloaded = false; //used to determine whether questions have been downloaded
 
         int prevQuestion = 0; //stores the index of the last question used
@@ -436,6 +438,7 @@ namespace CompsciFinal
                         answerfour.Text = answer;
                     }
 
+                    votedDown = false;
 
                     correctAnswer = answer; //assign the correct answer
 
@@ -460,15 +463,27 @@ namespace CompsciFinal
         private async void downVote_Clicked(object sender, EventArgs e) //down vote button (thumbs down)
         {
             //await DisplayAlert("ok", Questions[currentrandom].QuestionText, "ok");
-            bool answer = await DisplayAlert("Vote Down Question", "Are you sure?", "Yes", "No"); //if they want to (check)
-            if(answer == true)
+            bool answer = false;
+
+            if (votedDown)
+                await DisplayAlert("Error", "You cannot vote down a question more than once", "Ok");
+            else if(!votedDown)
+                answer = await DisplayAlert("Vote Down Question", "Are you sure?", "Yes", "No"); //if they want to (check)
+
+            if (!questionsAcquired)
+                await DisplayAlert("Error", "No question loaded into application", "Ok");
+
+
+            if (answer && masterLogged && !votedDown && questionsAcquired)
             { //reduce the questions vote count
+                votedDown = true;
                 await questionsHelper.UpdateQuestion(questionLabel.Text, Questions[currentrandom].CorrectAnswer, Questions[currentrandom].IncorrectAnswerOne, Questions[currentrandom].IncorrectAnswerTwo, Questions[currentrandom].IncorrectAnswerThree, Questions[currentrandom].tag, (Questions[currentrandom].votecount - 1));
                 if (Questions[currentrandom].votecount-1 < 1) //if the questions vote count falls below 1
                 {
                     await questionsHelper.DeleteQuestion(questionLabel.Text); //delete it
                 }
             }
+            
             
         }
     }

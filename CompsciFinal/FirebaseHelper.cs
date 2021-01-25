@@ -141,7 +141,23 @@ namespace CompsciFinal
               .Child("Persons")
               .Child(person.PersonId)
               .Child(toUpdatePerson.Key)
-              .PutAsync(new Person() { Name = person.Name, Score = newScore, PersonId = person.PersonId, totalAnswered = newTotal, softwareScore=person.softwareScore, programmingScore=person.programmingScore, totalProgramming=person.totalProgramming, totalConversions=person.totalConversions, conversionsScore = person.conversionsScore, cyberScore = person.cyberScore, hardwareScore = person.hardwareScore, totalCyber = person.totalCyber, totalHardware = person.totalHardware, totalSoftware = person.totalSoftware, classCode = person.classCode, teacher = person.teacher});
+              .PutAsync(new Person() { 
+                  Name = person.Name,
+                  Score = newScore,
+                  PersonId = person.PersonId,
+                  totalAnswered = newTotal,
+                  softwareScore=person.softwareScore,
+                  programmingScore=person.programmingScore,
+                  totalProgramming=person.totalProgramming,
+                  totalConversions=person.totalConversions,
+                  conversionsScore = person.conversionsScore,
+                  cyberScore = person.cyberScore,
+                  hardwareScore = person.hardwareScore,
+                  totalCyber = person.totalCyber,
+                  totalHardware = person.totalHardware,
+                  totalSoftware = person.totalSoftware,
+                  classCode = person.classCode,
+                  teacher = person.teacher});
 
             System.Diagnostics.Debug.Write("-------- Point 2 -------");
         }
